@@ -2,25 +2,25 @@ var express = require('express');
 var router = express.Router();
 var mysql = require('mysql');
 const app = express();
+require('dotenv').config();
 
 var con = mysql.createConnection({
-  host: "shim-db.ck6dpjl28utz.ap-northeast-2.rds.amazonaws.com",
-  user: "shinshim",
-  password: "Shim0323!",
-  database: "SHIM"
+  host: process.env.DB_HOST,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASS,
+  database: process.env.DB_NAME
 });
 
 con.connect(function(err) {
   if (err) throw err;
-  console.log("Connected!");
-});
+  // console.log("Connected!")
+})
 
 /* GET home page. */
 router.get('/:name', function(req, res) {
-  param = [req.params.name]
+  param = req.params.name
   let selectQuery = 'SELECT main_id FROM SHIM.MAIN_TB WHERE MAIN_TB.main_name = ?;'
   con.query(selectQuery, param, function(err, result){
-    console.log(result)
     if (err){
       res.status(500).send({
         message: "Error"
