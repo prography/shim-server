@@ -1,10 +1,10 @@
-# Show ID
+# Sleep
 
-name에 상응하는 id 값을 돌려준다.
+'수면' 탭에서 asmr 파일의 url과 asmr 제목을 제공한다.
 
 - **URL**
 
-  /users/:name
+  /sleep
 
 - **Method**
 
@@ -26,46 +26,4 @@ name에 상응하는 id 값을 돌려준다.
 
   **Code**: 200
 
-  **Content**: `{ status: 200, arr: [{ main_id: 1 }] }`
-
-  
-
-# Show Name
-
-id에 상응하는 name 값을 돌려준다.
-
-* **URL**
-
-  /users
-
-* **Method**
-
-  `POST`
-
-* **Header Params**
-
-  None
-
-* **URL Params**
-
-  None
-
-* **Data Params**
-
-  **Required:**
-
-  `id=[integer]`
-
-* **Success Response**
-
-  **Code**: 201
-
-  **Content**: `{ status: 500, msg: "error!" }`
-
-  
-
-  
-
-  
-
-  
+  **Content**: `{ status: 200, arr: [{ sleep_music: "BachGavotte.mp3", sleep_name: "BachGavotte" }, { sleep_music: "HarrisLilliburlero.mp3", sleep_name: "HarrisLilliburlero" }, {sleep_music: "PurcellSongMus.mp3", sleep_name: "PurcellSongMus"}, {sleep_music : "WalloonLilli.mp3", sleep_name: "WalloonLilli" }] }`

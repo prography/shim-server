@@ -1,9 +1,6 @@
-// music.js
 module.exports = (app) => {
-  const express = require('express');
-  const router = express.Router();
-  const mysql = require('mysql2/promise');
-
+  const express = require('express')
+  const router = express.Router()
   const pool = app.get('pool')
 
   const selectMainId = async (name) => {
@@ -36,7 +33,7 @@ module.exports = (app) => {
     }
   })
 
-  router.post("/", async (req, res) => {
+  router.post('/', async (req, res) => {
     const id = req.body.id
     try {
       const result = await selectMainName(id)
