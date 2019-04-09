@@ -1,43 +1,29 @@
+// music.js
 module.exports = (app) => {
   const express = require('express')
   const router = express.Router()
   const pool = app.get('pool')
 
-  const selectMainId = async (name) => {
+  const selectByCategory = async (category) => {
     try {
       const connection = await pool.getConnection()
-      const [result] = await connection.query('SELECT main_id FROM SHIM.MAIN_TB WHERE MAIN_TB.main_name = ?;', [name])
+      let result
+      if (category === 'all') {
+        [result] = await connection.query('SELECT music_id, music_name, music_music, music_picture FROM SHIM.MUSIC_TB;')
+      } else {
+        [result] = await connection.query('SELECT music_id, music_name, music_music, music_picture FROM SHIM.MUSIC_TB WHERE music_category like ?;', category)
+      }
       return result
     } catch (err) {
       throw new Error(err)
     }
   }
 
-  const selectMainName = async (id) => {
+  router.get('/:category', async (req, res) => {
+    const category = req.params.category // 전체, 수면, 악기, 자연
     try {
-      const connection = await pool.getConnection()
-      const [result] = await connection.query('SELECT main_name FROM SHIM.MAIN_TP WHERE MAIN_TB.main_id = ?;', [id])
-      return result
-    } catch (err) {
-      throw new Error(err)
-    }
-  }
-
-  router.get('/:name', async (req, res) => {
-    const name = req.params.name
-    try {
-      const result = await selectMainId(name)
+      const result = await selectByCategory(category)
       res.status(200).json({ 'status': 200, 'arr': result }) // arr, data, msg
-    } catch (err) {
-      res.status(500).json({ 'status': 500, 'msg': 'error!' })
-    }
-  })
-
-  router.post('/', async (req, res) => {
-    const id = req.body.id
-    try {
-      const result = await selectMainName(id)
-      res.status(201).json({ 'status': 201, 'arr': result })
     } catch (err) {
       res.status(500).json({ 'status': 500, 'msg': 'error!' })
     }

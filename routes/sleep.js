@@ -15,9 +15,7 @@ module.exports = (app) => {
   }
 
   router.get('/', async (req, res) => {
-    console.log(1)
     try {
-      console.log("sleep.js")
       const result = await selectMusicUrl()
       res.status(200).json({ 'status': 200, 'arr': result }) // arr, data, msg
     } catch (err) {
