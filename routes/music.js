@@ -20,7 +20,7 @@ module.exports = (app) => {
   }
 
   router.get('/:category', async (req, res) => {
-    const category = req.params.category // 전체, 수면, 악기, 자연
+    const category = req.params.category // all, sleep, instrument, nature
     try {
       const result = await selectByCategory(category)
       res.status(200).json({ 'status': 200, 'arr': result }) // arr, data, msg
