@@ -217,4 +217,4 @@
 
 IP주소: 52.78.106.14
 
-​	EX. 52.78.106.14/sleep/instrument
+​	EX. 52.78.106.14/music/instrument
