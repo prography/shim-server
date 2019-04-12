@@ -208,3 +208,13 @@
 
   * 음악 URL: <https://s3.ap-northeast-2.amazonaws.com/shim-music/(music_music_값)>
   * 사진 URL: <https://s3.ap-northeast-2.amazonaws.com/shim-music/(music_picture_값)>
+
+
+
+---
+
+# 참고
+
+IP주소: 52.78.106.14
+
+​	EX. 52.78.106.14/sleep/instrument
