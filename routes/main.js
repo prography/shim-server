@@ -4,10 +4,29 @@ module.exports = (app) => {
   const router = express.Router()
   const pool = app.get('pool')
 
-  const selectAll = async () => {
+  const selectRandomly = async () => {
     try {
+      let numbers = []
+      let result = []
+      let rand = 4
       const connection = await pool.getConnection()
-      const [result] = await connection.query('SELECT main_id, main_name, main_music, main_picture FROM SHIM.MAIN_TB;')
+      const [temp] = await connection.query('SELECT COUNT(*) FROM SHIM.MAIN_TB;')
+      const count = temp[0]['COUNT(*)']
+
+      for (let i=0; i<rand; i++) {
+        numbers[i] = Math.floor(Math.random() * count) + 1
+        for (let j=0; j<i; j++) {
+          if (numbers[i] == numbers[j]) {
+            i = i-1;
+            break;
+          }
+        }
+      }
+
+      for (let i=0; i<rand; i++) {
+        const [temp] = await connection.query('SELECT main_id, main_name, main_music, main_picture FROM SHIM.MAIN_TB WHERE main_id = ?;', numbers[i])
+        result.push(temp[0])
+      }
       return result
     } catch (err) {
       throw new Error(err)
@@ -17,7 +36,7 @@ module.exports = (app) => {
   router.get('/', async (req, res) => {
 
     try {
-      const result = await selectAll()
+      const result = await selectRandomly()
       res.status(200).json({ 'status': 200, 'arr': result }) // arr, data, msg
     } catch (err) {
       res.status(500).json({ 'status': 500, 'msg': 'error!' })
