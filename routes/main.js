@@ -27,8 +27,10 @@ module.exports = (app) => {
         const [temp] = await connection.query('SELECT main_id, main_name, main_music, main_picture FROM SHIM.MAIN_TB WHERE main_id = ?;', numbers[i])
         result.push(temp[0])
       }
+      connection.release()
       return result
     } catch (err) {
+      connection.release()
       throw new Error(err)
     }
   }

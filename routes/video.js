@@ -13,8 +13,10 @@ module.exports = (app) => {
       } else {
         [result] = await connection.query('SELECT video_id, video_url, video_title, video_creator FROM SHIM.VIDEO_TB WHERE video_category like ?;', category)
       }
+      connection.release()
       return result
     } catch (err) {
+      connection.release()
       throw new Error(err)
     }
   }

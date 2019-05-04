@@ -7,8 +7,10 @@ module.exports = (app) => {
     try {
       const connection = await pool.getConnection()
       const [result] = await connection.query('SELECT main_id FROM SHIM.MAIN_TB WHERE MAIN_TB.main_name = ?;', [name])
+      connection.release()
       return result
     } catch (err) {
+      connection.release()
       throw new Error(err)
     }
   }
@@ -17,8 +19,10 @@ module.exports = (app) => {
     try {
       const connection = await pool.getConnection()
       const [result] = await connection.query('SELECT main_name FROM SHIM.MAIN_TP WHERE MAIN_TB.main_id = ?;', [id])
+      connection.release()
       return result
     } catch (err) {
+      connection.release()
       throw new Error(err)
     }
   }
