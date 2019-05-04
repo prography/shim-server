@@ -13,8 +13,10 @@ module.exports = (app) => {
       } else {
         [result] = await connection.query('SELECT music_id, music_name, music_music, music_picture FROM SHIM.MUSIC_TB WHERE music_category like ?;', category)
       }
+      connection.release()
       return result
     } catch (err) {
+      connection.release()
       throw new Error(err)
     }
   }

@@ -8,8 +8,10 @@ module.exports = (app) => {
     try {
       const connection = await pool.getConnection()
       const [result] = await connection.query('SELECT main_id, main_name, main_music, main_picture FROM SHIM.MAIN_TB;')
+      connection.release()
       return result
     } catch (err) {
+      connection.release()
       throw new Error(err)
     }
   }
