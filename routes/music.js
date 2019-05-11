@@ -9,9 +9,9 @@ module.exports = (app) => {
       const connection = await pool.getConnection()
       let result
       if (category === 'all') {
-        [result] = await connection.query('SELECT music_id, music_name, music_music, music_picture FROM SHIM.MUSIC_TB;')
+        [result] = await connection.query('SELECT music_id, music_name, music_music, music_author, music_picture FROM SHIM.MUSIC_TB;')
       } else {
-        [result] = await connection.query('SELECT music_id, music_name, music_music, music_picture FROM SHIM.MUSIC_TB WHERE music_category like ?;', category)
+        [result] = await connection.query('SELECT music_id, music_name, music_music, music_author, music_picture FROM SHIM.MUSIC_TB WHERE music_category like ?;', category)
       }
       connection.release()
       return result

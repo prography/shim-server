@@ -12,6 +12,7 @@ module.exports = (app) => {
       const connection = await pool.getConnection()
       const [temp] = await connection.query('SELECT COUNT(*) FROM SHIM.MAIN_TB;')
       const count = temp[0]['COUNT(*)']
+      console.log(count)
 
       for (let i=0; i<rand; i++) {
         numbers[i] = Math.floor(Math.random() * count) + 1
@@ -24,7 +25,7 @@ module.exports = (app) => {
       }
 
       for (let i=0; i<rand; i++) {
-        const [temp] = await connection.query('SELECT main_id, main_name, main_music, main_picture FROM SHIM.MAIN_TB WHERE main_id = ?;', numbers[i])
+        const [temp] = await connection.query('SELECT main_id, main_name, main_music, main_author, main_picture FROM SHIM.MAIN_TB WHERE main_id = ?;', numbers[i])
         result.push(temp[0])
       }
       connection.release()

@@ -7,7 +7,7 @@ module.exports = (app) => {
   const selectMusicUrl = async () => {
     try {
       const connection = await pool.getConnection()
-      const [result] = await connection.query('SELECT sleep_id, sleep_music, sleep_name FROM SHIM.SLEEP_TB;')
+      const [result] = await connection.query('SELECT sleep_id, sleep_music, sleep_author, sleep_name FROM SHIM.SLEEP_TB;')
       connection.release()
       return result
     } catch (err) {
