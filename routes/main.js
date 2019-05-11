@@ -8,7 +8,7 @@ module.exports = (app) => {
     try {
       let numbers = []
       let result = []
-      let rand = 4
+      let rand = 3
       const connection = await pool.getConnection()
       const [temp] = await connection.query('SELECT COUNT(*) FROM SHIM.MAIN_TB;')
       const count = temp[0]['COUNT(*)']

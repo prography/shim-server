@@ -1,6 +1,6 @@
 # Main
 
-'홈' 탭에서 id, 음악 파일의 url, 사진의 url, 음악 제목을 제공한다.
+'홈' 탭에서 랜덤으로 3개의 main id, 음악 파일의 url, 사진의 url, 음악 제목, 음악 제작자를 제공한다.
 
 - **URL**
 
@@ -28,22 +28,20 @@
 
   **Content**:
 
-  `{ status : 200,`
+  `{ status: 200,`
 
-  `arr : [{ main_id : 1, main_name : "BachGavotte", main_music : "BachGavotte.mp3", main_picture : "4.jpg"},`
+  `arr: [{ main_id: 3, main_name: "Clouds", main_music: "Clouds.mp3", main_author: "Huma-Huma", main_picture: "7.jpg"},`
 
-  `{ main_id : 2, main_name : "HarrisLilliburlero", main_music : "HarrisLilliburlero.mp3", main_picture : "3.jpg" },`
+  `{ main_id: 6, main_name: "Go to Sleep My Little One", main_music: "Go_to_Sleep_My_Little_One.mp3", main_author: "Doug Maxwell/Media Right Productions", main_picture: "11.jpg"},`
 
-  `{ main_id : 3, main_name : "PurcellSongMus", main_music : "PurcellSongMus.mp3",  main_picture : "2.jpg" },`
-
-  `{ main_id : 4, main_name : "WalloonLilli", main_music : "WalloonLilli.mp3", main_picture : "1.jpg" }] }`
+  `{ main_id: 11, main_name: "Pachabelly", main_music: "Pachabelly.mp3", main_author: "Aakash Gandhi", main_picture: "16.jpg" }] }`
 
   `main_music`이  음악 URL, `main_picture`이 사진 URL이다.
 
   실제 URL 주소는
 
   - 음악 URL: <https://s3.ap-northeast-2.amazonaws.com/shim-main/(main_music_값)>
-  - 사진 URL: <https://s3.ap-northeast-2.amazonaws.com/shim-main/(main_picture_값)>
+- 사진 URL: <https://s3.ap-northeast-2.amazonaws.com/shim-main/(main_picture_값)>
 
 
 
@@ -53,7 +51,7 @@
 
 # Sleep
 
-'수면' 탭에서 asmr 파일의 id, url과 asmr 제목을 제공한다.
+'수면' 탭에서 asmr 파일의 id, url, asmr 제작자와 asmr 제목을 제공한다.
 
 - **URL**
 
@@ -81,15 +79,11 @@
 
   **Content**:
 
-  `{ status: 200, `
+  `{ status: 200,`
 
-  `arr: [{ sleep_id: 1, sleep_music: "BachGavotte.mp3", sleep_name: "BachGavotte" }, `
+  `arr: [{ sleep_id: 1, sleep_music: "Minyo_San_Kyoku.mp3", sleep_author: "Doug Maxwell/ Zac Zinger", sleep_name: "Minyo San Kyoku" },`
 
-  `{ sleep_id: 2, sleep_music: "HarrisLilliburlero.mp3", sleep_name: "HarrisLilliburlero" }, `
-
-  `{ sleep_id: 3, sleep_music: "PurcellSongMus.mp3", sleep_name: "PurcellSongMus" }, `
-
-  `{ sleep_id: 4, sleep_music : "WalloonLilli.mp3", sleep_name: "WalloonLilli" }] }`
+  `{ sleep_id: 2, sleep_music: "White_River.mp3", sleep_author: "Aakash Gandhi", sleep_name: "White River" }`
 
   여기서 sleep_music이 URL인데, 실제 URL 주소는
 
@@ -158,7 +152,7 @@
 
 # Music
 
-'음악' 탭에서 음악 id, 음악 파일의 url, 사진의 url, 음악 제목을 제공한다.
+'음악' 탭에서 음악 id, 음악 파일의 url, 사진의 url, 음악 제작자와 음악 제목을 제공한다.
 
 - **URL**
 
@@ -190,28 +184,241 @@
 
   **Content**:
 
-  `/music/all`에 대한 결과 :
+  `/music/instrument`에 대한 결과 :
 
-  `{ status :200,`
+  `{ status: 200, `
 
-  `arr :[{ music_id : 1, music_name : "BachGavotte", music_music : "BachGavotte.mp3" , music_picture : "1.jpg" },`
+  `arr: [{ music_id: 1, music_name: "Minyo San Kyoku", music_music: "Minyo_San_Kyoku.mp3", music_author: "Doug Maxwell/ Zac Zinger", music_picture: "3.jpg"},`
 
-  `{ music_id : 2, music_name : "HarrisLilliburlero", music_music : "HarrisLilliburlero.mp3", music_picture : "2.jpg" },`
-
-  `{ music_id : 3, music_name : "PurcellSongMus", music_music : "PurcellSongMus.mp3", music_picture : "3.jpg" },`
-
-  `{ music_id : 4, music_name : "WalloonLilli", music_music : "WalloonLilli.mp3", music_picture : "4.jpg" }] }`
+  `{ music_id: 9, music_name: "Holiday Brass Ensemble", music_music: "Holiday_Brass_Ensemble.mp3", music_author: "Doug Maxwell/Media Right Productions", music_picture: "14.jpg" }] }`
 
   `music_music`이  음악 URL, `music_picture`이 사진 URL이다.
 
   실제 URL 주소는
 
   * 음악 URL: <https://s3.ap-northeast-2.amazonaws.com/shim-music/(music_music_값)>
-  * 사진 URL: <https://s3.ap-northeast-2.amazonaws.com/shim-music/(music_picture_값)>
+* 사진 URL: <https://s3.ap-northeast-2.amazonaws.com/shim-music/(music_picture_값)>
 
 
 
----
+
+
+
+
+
+
+# log/frag
+
+사용자가 fragment를 바꿀 때마다 log값을 저장한다.
+
+- **URL**
+
+  /log/frag
+
+- **Method**
+
+  `POST`
+
+- **Header Params**
+
+  None
+
+- **URL Params**
+
+  None
+
+- **Data Params**
+
+   `f_enter_log_user_id` : VARCHAR
+    `f_enter_log_type` : VARCHAR (main/sleep/music/video 중 하나)
+
+- **Success Response**
+
+  **Code**: 200
+
+  **Content**:
+
+  `{ status: 200, msg: "ok" }`
+
+
+
+
+
+
+
+# log/main
+
+사용자가 main 화면을 바꿀 때마다, 음악을 재생하거나 정지할 때마다 log 값을 저장한다.
+
+- **URL**
+
+  /log/main
+
+- **Method**
+
+  `POST`
+
+- **Header Params**
+
+  None
+
+- **URL Params**
+
+  None
+
+- **Data Params**
+
+  `main_log_user_id` : VARCHAR
+
+  `main_log_pic_id` : INT
+
+  `main_log_action` : SMALLINT (1: 재생, 0: 정지)
+
+- **Success Response**
+
+  **Code**: 200
+
+  **Content**:
+
+  `{ status: 200, msg: "ok" }`
+
+
+
+
+
+
+
+
+
+# log/sleep
+
+사용자가 sleep에서 음악을 재생하거나 정지할 때마다 log 값을 저장한다.
+
+- **URL**
+
+  /log/sleep
+
+- **Method**
+
+  `POST`
+
+- **Header Params**
+
+  None
+
+- **URL Params**
+
+  None
+
+- **Data Params**
+
+  `sleep_log_user_id` : VARCHAR
+
+  `sleep_log_sleep_id` : INT
+
+  `sleep_log_action` : SMALLINT (1: 재생, 0: 정지)
+
+- **Success Response**
+
+  **Code**: 200
+
+  **Content**:
+
+  `{ status: 200, msg: "ok" }`
+
+
+
+
+
+
+
+# log/video
+
+사용자가 video에서 영상을 재생하거나 정지할 때마다 log 값을 저장한다.
+
+- **URL**
+
+  /log/video
+
+- **Method**
+
+  `POST`
+
+- **Header Params**
+
+  None
+
+- **URL Params**
+
+  None
+
+- **Data Params**
+
+  `video_log_user_id` : VARCHAR
+
+  `video_log_video_id` : INT
+
+  `video_log_action` : SMALLINT (1: 재생, 0: 정지)
+
+- **Success Response**
+
+  **Code**: 200
+
+  **Content**:
+
+  `{ status: 200, msg: "ok" }`
+
+
+
+
+
+
+
+
+
+
+
+# log/music
+
+사용자가 music에서 음악을 재생하거나 정지할 때마다 log 값을 저장한다.
+
+- **URL**
+
+  /log/music
+
+- **Method**
+
+  `POST`
+
+- **Header Params**
+
+  None
+
+- **URL Params**
+
+  None
+
+- **Data Params**
+
+  `music_log_user_id` : VARCHAR
+
+  `music_log_music_id` : INT
+
+  `music_log_action` : SMALLINT (1: 재생, 0: 정지)
+
+- **Success Response**
+
+  **Code**: 200
+
+  **Content**:
+
+  `{ status: 200, msg: "ok" }`
+
+
+
+
+
+
 
 # 참고
 
