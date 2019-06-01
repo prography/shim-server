@@ -43,9 +43,7 @@
   - 음악 URL: <https://s3.ap-northeast-2.amazonaws.com/shim-main/(main_music_값)>
 - 사진 URL: <https://s3.ap-northeast-2.amazonaws.com/shim-main/(main_picture_값)>
 
-
-
-
+---
 
 
 
@@ -143,9 +141,7 @@
 
   EX. https://youtu.be/w-N8FWyNZzk
 
-
-
-
+---
 
 
 
@@ -199,11 +195,7 @@
   * 음악 URL: <https://s3.ap-northeast-2.amazonaws.com/shim-music/(music_music_값)>
 * 사진 URL: <https://s3.ap-northeast-2.amazonaws.com/shim-music/(music_picture_값)>
 
-
-
-
-
-
+---
 
 
 
@@ -240,9 +232,7 @@
 
   `{ status: 200, msg: "ok" }`
 
-
-
-
+---
 
 
 
@@ -282,11 +272,7 @@
 
   `{ status: 200, msg: "ok" }`
 
-
-
-
-
-
+---
 
 
 
@@ -368,13 +354,7 @@
 
   `{ status: 200, msg: "ok" }`
 
-
-
-
-
-
-
-
+---
 
 
 
@@ -414,9 +394,51 @@
 
   `{ status: 200, msg: "ok" }`
 
+---
 
 
 
+
+
+# etc/feedback
+
+사용자로부터 feedback을 받는다.
+
+- **URL**
+
+  /etc/feedback
+
+- **Method**
+
+  `POST`
+
+- **Header Params**
+
+  None
+
+- **URL Params**
+
+  None
+
+- **Data Params**
+
+  `feedback_userid` : VARCHAR
+
+  `feedback_contact` : VARCHAR
+
+  `feedback_title` : VARCHAR
+
+  `feedback_contents` : TEXT
+
+- **Success Response**
+
+  **Code**: 200
+
+  **Content**:
+
+  `{ status: 200, msg: "ok" }`
+
+---
 
 
 

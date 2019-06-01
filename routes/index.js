@@ -7,6 +7,7 @@ module.exports = (app) => {
   router.use('/video', require('./video')(app))
   router.use('/music', require('./music')(app))
   router.use('/log', require('./log')(app))
+  router.use('/etc', require('./etc')(app))
 
   return router
 }

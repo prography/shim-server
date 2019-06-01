@@ -24,7 +24,7 @@ app.set('pool', pool)
 // app.js
 const indexRouter = require('./routes/index')(app)
 const usersRouter = require('./routes/users')(app)
-// const randomRouter = require('./utils/random')(app)
+const randomRouter = require('./utils/random')(app)
 
 app.use(logger('dev'))
 app.use(express.json())
