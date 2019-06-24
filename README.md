@@ -49,7 +49,7 @@
 
 # Sleep
 
-'수면' 탭에서 asmr 파일의 id, url, asmr 제작자와 asmr 제목을 제공한다.
+'수면' 탭에서 asmr 파일의 id, url, asmr 제목과 사진을 제공한다.
 
 - **URL**
 
@@ -77,17 +77,21 @@
 
   **Content**:
 
-  `{ status: 200,`
+  `{ status : 200,`
 
-  `arr: [{ sleep_id: 1, sleep_music: "Minyo_San_Kyoku.mp3", sleep_author: "Doug Maxwell/ Zac Zinger", sleep_name: "Minyo San Kyoku" },`
+  `arr : [{ sleep_id : 1, sleep_music : "fall1.mp3", sleep_name : "새와 밤벌레 울음소리 1", sleep_picture : "33.jpg" },`
 
-  `{ sleep_id: 2, sleep_music: "White_River.mp3", sleep_author: "Aakash Gandhi", sleep_name: "White River" }`
+  `{ sleep_id : 2, sleep_music : "fall2.mp3", sleep_name : "새와 밤벌레 울음소리 2", sleep_picture : "28.jgp" }] }` 
 
-  여기서 sleep_music이 URL인데, 실제 URL 주소는
+  * ASMR URL: sleep_music
 
-  <https://s3.ap-northeast-2.amazonaws.com/shim-sleep/(sleep_music_값)>  형식이다.
+    실제 주소: <https://s3.ap-northeast-2.amazonaws.com/shim-sleep/(sleep_music_값)>
 
-  ​	EX. <https://s3.ap-northeast-2.amazonaws.com/shim-sleep/BachGavotte.mp3>
+  * Picture URL: sleep_picture
+  
+    실제 주소: <https://s3.ap-northeast-2.amazonaws.com/shim-sleep/(sleep_picture_값)> 
+  
+  ​	EX. <https://s3.ap-northeast-2.amazonaws.com/shim-sleep/fall1.mp3>
 
 
 
