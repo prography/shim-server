@@ -158,7 +158,7 @@
 
   /music/:category
 
-  * category에는 all / sleep / instrument / nature이 있다.
+  * category에는 all / relax / focus 가 있다.  (* 수정됨)
 
     ​	( EX. /music/all )
 
