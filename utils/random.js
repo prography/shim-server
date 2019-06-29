@@ -11,10 +11,11 @@ module.exports = (app) => {
 
       let numbers = []
       const [temp] = await connection.query('SELECT COUNT(*) FROM SHIM.MAIN_TB;')
+      console.log(temp)
       const count = temp[0]['COUNT(*)']
 
-      for (let i=0; i<count; i++) {
-        numbers[i] = Math.floor(Math.random() * count) + 1
+      for (let i=0; i<count; i++) {//1~열개수 사이의 값을 겹치지 않고 랜덤하게 저장
+        numbers[i] = Math.floor(Math.random() * count) + 1 
         for (let j=0; j<i; j++) {
           if (numbers[i] == numbers[j]) {
             i = i-1;
@@ -41,6 +42,35 @@ module.exports = (app) => {
   const update = schedule.scheduleJob('00 00 00 * * *', async () => {
     try {
       await updateRandomly()
+    } catch (err) {
+      console.log(err)
+    }
+  })
+
+
+  //음악 리스트 셔플재생 
+  const listShuffle = async () => {
+      try {
+        const connection = await pool.getConnection()
+
+        let [temp] = await connection.query('SELECT music_id FROM SHIM.MUSIC_TB;') //music_id만 불러옴
+        temp.sort(function(a, b){return 0.5 - Math.random()}); //music_id 랜덤하게 정렬
+      
+        for (let i=1; i<=temp.length; i++) {
+          //console.log(temp[i-1]['music_id']) temp의 숫자값만 출력
+          await connection.query('UPDATE SHIM.MUSIC_TB SET music_order = ? WHERE music_id = ?;', [temp[i-1]['music_id'], i])//music_order에 랜덤값 저장
+        }
+        let [order] = await connection.query('SELECT music_order FROM SHIM.MUSIC_TB;')
+        console.log(order)
+
+      }catch (err) {
+        console.log(err)
+      }
+  }
+ 
+  const updateMusic = schedule.scheduleJob('00 00 00 * * *', async () => {
+    try {
+      await listShuffle()
     } catch (err) {
       console.log(err)
     }
