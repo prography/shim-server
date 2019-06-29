@@ -152,13 +152,13 @@
 
 # Music
 
-'음악' 탭에서 음악 id, 음악 파일의 url, 사진의 url, 음악 제작자와 음악 제목을 제공한다.
+'음악' 탭에서 음악 id, 음악 파일의 url, 사진의 url, 음악 제작자, 음악 제목과 해당 음악이 my에 추가 되었는지 아닌지 여부를 제공한다.
 
 - **URL**
 
   /music/:category
 
-  * category에는 all / relax / focus 가 있다.  (* 수정됨)
+  * category에는 all / my / relax / focus / classic 가 있다.  (* 수정됨)
 
     ​	( EX. /music/all )
 
@@ -172,7 +172,9 @@
 
 - **URL Params**
 
-  None
+  `id` : STRING
+
+  (EX. /music/all?id='a')
 
 - **Data Params**
 
@@ -184,13 +186,11 @@
 
   **Content**:
 
-  `/music/instrument`에 대한 결과 :
+  `{ status : 200,`
 
-  `{ status: 200, `
+  `arr : [{ music_id : 2, music_name : "White River", music_music : "White_River.mp3", music_author : "Aakash Gandhi", music_picture : "11.jpg", my : false},`
 
-  `arr: [{ music_id: 1, music_name: "Minyo San Kyoku", music_music: "Minyo_San_Kyoku.mp3", music_author: "Doug Maxwell/ Zac Zinger", music_picture: "3.jpg"},`
-
-  `{ music_id: 9, music_name: "Holiday Brass Ensemble", music_music: "Holiday_Brass_Ensemble.mp3", music_author: "Doug Maxwell/Media Right Productions", music_picture: "14.jpg" }] }`
+  `{ music_id : 4, music_name : "Simple Sonata", music_music : "Simple_Sonata.mp3", music_author : "Sir Cubworth", music_picture : "15.jpg", my : false }] }`
 
   `music_music`이  음악 URL, `music_picture`이 사진 URL이다.
 
@@ -198,6 +198,55 @@
 
   * 음악 URL: <https://s3.ap-northeast-2.amazonaws.com/shim-music/(music_music_값)>
 * 사진 URL: <https://s3.ap-northeast-2.amazonaws.com/shim-music/(music_picture_값)>
+
+
+
+---
+
+
+
+# My
+
+'음악' 탭에서 `my`에 음악을 추가하거나 삭제한다.
+
+- **URL**
+
+  /music
+
+- **Method**
+
+  `POST`
+
+- **Header Params**
+
+  None
+
+- **URL Params**
+
+  None
+
+- **Data Params**
+
+  `user_id` : STRING
+
+  `music_id` : INT
+
+  `my` : BOOLEAN (해당 곡이 my에 이미 추가되어 있으면 `true`, 아니면 `false`)
+
+- **Success Response**
+
+  **Code**: 200
+
+  **Content**:
+
+  `{
+      status : 200,
+      msg : "ok!"
+  }`
+
+
+
+
 
 ---
 

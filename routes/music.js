@@ -4,7 +4,7 @@ module.exports = (app) => {
   const router = express.Router()
   const pool = app.get('pool')
 
-  const selectByCategory = async (category) => {
+  const selectByCategory = async (category, user_id) => {
     try {
       const connection = await pool.getConnection()
       let result
@@ -33,12 +33,20 @@ module.exports = (app) => {
     }
   }
 
-  const insertMyMusic = async (user_id, music_id) => {
+  const updateMyMusic = async (user_id, music_id, my) => {
     try {
       const connection = await pool.getConnection()
-      const result = await connection.query('INSERT INTO SHIM.MY_TB (my_user_id, my_music_id) VALUES (?, ?);', [user_id, music_id])
-      connection.release()
-      return true
+      if (my === false) {
+        console.log('f')
+        const result = await connection.query('INSERT INTO SHIM.MY_TB (my_user_id, my_music_id) VALUES (?, ?);', [user_id, music_id])
+        connection.release()
+        return true
+      } else {
+        console.log('t')
+        const result = await connection.query('DELETE FROM SHIM.MY_TB WHERE my_user_id = ? AND my_music_id = ?;', [user_id, music_id])
+        connection.release()
+        return true
+      }
     } catch (err) {
       connection.release()
       throw new Error(err)
@@ -46,15 +54,25 @@ module.exports = (app) => {
   }
 
   router.get('/:category', async (req, res) => {
-    const category = req.params.category // all, my, relax, focus
     try {
+      const category = req.params.category // all, my, relax, focus
+      const user_id = req.query.id
       let result
       if (category === 'my') {
-        const user_id = req.query.id
         result = await selectMyInfo(user_id)
       } else {
-        console.log(category)
-        result = await selectByCategory(category)
+        result = await selectByCategory(category, user_id)
+        const my_result = await selectMyInfo(user_id)
+        for (let i in result) { // my에 추가되어 있는 music_i이면 true, 아니면 false
+          result[i].my = false
+          for (let j in my_result) {
+            if (result[i].music_id === my_result[j].music_id) {
+              result[i].my = true
+              break
+            }
+            if (result[i].my === true) { break }
+          }
+        }
       }
       res.status(200).json({ 'status': 200, 'arr': result }) // arr, data, msg
     } catch (err) {
@@ -66,7 +84,8 @@ module.exports = (app) => {
     try {
       const user_id = req.body.user_id
       const music_id = req.body.music_id
-      await insertMyMusic(user_id, music_id)
+      const my = req.body.my
+      await updateMyMusic(user_id, music_id, my)
       res.status(200).json({ 'status': 200, 'msg': 'ok!' })
     } catch (err) {
       res.status(500).json({ 'status': 500, 'msg': 'error!' })
