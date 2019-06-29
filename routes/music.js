@@ -10,7 +10,7 @@ module.exports = (app) => {
       let result
       if (category === 'all') { //category가 all일때
         [result] = await connection.query('SELECT music_id, music_name, music_music, music_author, music_picture FROM SHIM.MUSIC_TB ORDER BY music_order ASC;')
-      } else {      //category가 선택되어있을 때                   
+      } else {      //category가 선택되어있을 때
         [result] = await connection.query('SELECT music_id, music_name, music_music, music_author, music_picture FROM SHIM.MUSIC_TB WHERE music_category like ? ORDER BY music_order ASC;', category)
       }
       connection.release()
@@ -36,13 +36,11 @@ module.exports = (app) => {
   const updateMyMusic = async (user_id, music_id, my) => {
     try {
       const connection = await pool.getConnection()
-      if (my === false) {
-        console.log('f')
+      if (my === 'false') {
         const result = await connection.query('INSERT INTO SHIM.MY_TB (my_user_id, my_music_id) VALUES (?, ?);', [user_id, music_id])
         connection.release()
         return true
       } else {
-        console.log('t')
         const result = await connection.query('DELETE FROM SHIM.MY_TB WHERE my_user_id = ? AND my_music_id = ?;', [user_id, music_id])
         connection.release()
         return true

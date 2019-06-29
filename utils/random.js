@@ -38,51 +38,55 @@ module.exports = (app) => {
 
   // video list shuffle
   const videoListShuffle = async () => {
-      try {
-        const connection = await pool.getConnection()
+    const connection = await pool.getConnection()
+    try {
+      let [temp] = await connection.query('SELECT VIDEO_TB.video_id FROM SHIM.VIDEO_TB;') // video_id만 불러옴
+      temp.sort(function(a, b){return 0.5 - Math.random()}); // video_id 랜덤하게 정렬
 
-        let [temp] = await connection.query('SELECT video_id FROM SHIM.VIDEO_TB;') //video_id만 불러옴
-        temp.sort(function(a, b){return 0.5 - Math.random()}); //music_id 랜덤하게 정렬
-
-        for (let i=1; i<=temp.length; i++) {
-          //console.log(temp[i-1]['music_id']) temp의 숫자값만 출력
-          await connection.query('UPDATE SHIM.MUSIC_TB SET music_order = ? WHERE music_id = ?;', [temp[i-1]['music_id'], i])//music_order에 랜덤값 저장
-        }
-        let [order] = await connection.query('SELECT music_order FROM SHIM.MUSIC_TB;')
-        console.log(order)
-
-      }catch (err) {
-        console.log(err)
+      for (let i=1; i<=temp.length; i++) {
+        await connection.query('UPDATE SHIM.VIDEO_TB SET video_order=? WHERE video_id=?', [temp[i-1]['video_id'], i])//music_order에 랜덤값 저장
       }
+      connection.release()
+      return true
+    } catch (err) {
+      connection.release()
+      throw new Error(err)
+    }
   }
 
   // music list shuffle
   const musicListShuffle = async () => {
-      try {
-        const connection = await pool.getConnection()
+    const connection = await pool.getConnection()
+    try {
+      let [temp] = await connection.query('SELECT music_id FROM SHIM.MUSIC_TB;') //music_id만 불러옴
+      temp.sort(function(a, b){return 0.5 - Math.random()}); //music_id 랜덤하게 정렬
 
-        let [temp] = await connection.query('SELECT music_id FROM SHIM.MUSIC_TB;') //music_id만 불러옴
-        temp.sort(function(a, b){return 0.5 - Math.random()}); //music_id 랜덤하게 정렬
-
-        for (let i=1; i<=temp.length; i++) {
-          //console.log(temp[i-1]['music_id']) temp의 숫자값만 출력
-          await connection.query('UPDATE SHIM.MUSIC_TB SET music_order = ? WHERE music_id = ?;', [temp[i-1]['music_id'], i])//music_order에 랜덤값 저장
-        }
-        let [order] = await connection.query('SELECT music_order FROM SHIM.MUSIC_TB;')
-        console.log(order)
-
-      }catch (err) {
-        console.log(err)
+      for (let i=1; i<=temp.length; i++) {
+        await connection.query('UPDATE SHIM.MUSIC_TB SET music_order = ? WHERE music_id = ?;', [temp[i-1]['music_id'], i])//music_order에 랜덤값 저장
       }
+      connection.release()
+      return true
+    } catch (err) {
+      throw new Error(err)
+    }
   }
 
-  const updateMusic = schedule.scheduleJob('00 00 00 * * *', async () => {
+  const update = schedule.scheduleJob('00 00 00 * * *', async () => {
     try {
       await mainListShuffle()
+      await videoListShuffle()
       await musicListShuffle()
     } catch (err) {
       console.log(err)
     }
   })
+
+  // const updateVideo = schedule.scheduleJob('00 * * * * *', async () => {
+  //   try {
+  //     await videoListShuffle()
+  //   } catch (err) {
+  //     console.log(err)
+  //   }
+  // })
 
 }
