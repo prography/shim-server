@@ -252,13 +252,13 @@
 
 
 
-# log/frag
+# log
 
-사용자가 fragment를 바꿀 때마다 log값을 저장한다.
+log를 저장한다.
 
 - **URL**
 
-  /log/frag
+  /log
 
 - **Method**
 
@@ -274,88 +274,11 @@
 
 - **Data Params**
 
-   `f_enter_log_user_id` : VARCHAR
-    `f_enter_log_type` : VARCHAR (main/sleep/music/video 중 하나)
+   `user`: STRING
 
-- **Success Response**
+   `event`: STRING
 
-  **Code**: 200
-
-  **Content**:
-
-  `{ status: 200, msg: "ok" }`
-
----
-
-
-
-# log/main
-
-사용자가 main 화면을 바꿀 때마다, 음악을 재생하거나 정지할 때마다 log 값을 저장한다.
-
-- **URL**
-
-  /log/main
-
-- **Method**
-
-  `POST`
-
-- **Header Params**
-
-  None
-
-- **URL Params**
-
-  None
-
-- **Data Params**
-
-  `main_log_user_id` : VARCHAR
-
-  `main_log_pic_id` : INT
-
-  `main_log_action` : SMALLINT (1: 재생, 0: 정지)
-
-- **Success Response**
-
-  **Code**: 200
-
-  **Content**:
-
-  `{ status: 200, msg: "ok" }`
-
----
-
-
-
-# log/sleep
-
-사용자가 sleep에서 음악을 재생하거나 정지할 때마다 log 값을 저장한다.
-
-- **URL**
-
-  /log/sleep
-
-- **Method**
-
-  `POST`
-
-- **Header Params**
-
-  None
-
-- **URL Params**
-
-  None
-
-- **Data Params**
-
-  `sleep_log_user_id` : VARCHAR
-
-  `sleep_log_sleep_id` : INT
-
-  `sleep_log_action` : SMALLINT (1: 재생, 0: 정지)
+   `params`: STRING
 
 - **Success Response**
 
@@ -366,86 +289,6 @@
   `{ status: 200, msg: "ok" }`
 
 
-
-
-
-
-
-# log/video
-
-사용자가 video에서 영상을 재생하거나 정지할 때마다 log 값을 저장한다.
-
-- **URL**
-
-  /log/video
-
-- **Method**
-
-  `POST`
-
-- **Header Params**
-
-  None
-
-- **URL Params**
-
-  None
-
-- **Data Params**
-
-  `video_log_user_id` : VARCHAR
-
-  `video_log_video_id` : INT
-
-  `video_log_action` : SMALLINT (1: 재생, 0: 정지)
-
-- **Success Response**
-
-  **Code**: 200
-
-  **Content**:
-
-  `{ status: 200, msg: "ok" }`
-
----
-
-
-
-# log/music
-
-사용자가 music에서 음악을 재생하거나 정지할 때마다 log 값을 저장한다.
-
-- **URL**
-
-  /log/music
-
-- **Method**
-
-  `POST`
-
-- **Header Params**
-
-  None
-
-- **URL Params**
-
-  None
-
-- **Data Params**
-
-  `music_log_user_id` : VARCHAR
-
-  `music_log_music_id` : INT
-
-  `music_log_action` : SMALLINT (1: 재생, 0: 정지)
-
-- **Success Response**
-
-  **Code**: 200
-
-  **Content**:
-
-  `{ status: 200, msg: "ok" }`
 
 ---
 
