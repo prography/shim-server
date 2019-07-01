@@ -54,6 +54,24 @@ module.exports = (app) => {
     }
   }
 
+  // sleep list shuffle
+  const sleepListShuffle = async () => {
+    const connection = await pool.getConnection()
+    try {
+      let [temp] = await connection.query('SELECT SLEEP_TB.sleep_id FROM SHIM.SLEEP_TB;')
+      temp.sort(function(a, b){return 0.5 - Math.random()});
+
+      for (let i=1; i<=temp.length; i++) {
+        await connection.query('UPDATE SHIM.SLEEP_TB SET sleep_order=? WHERE sleep_id=?', [temp[i-1]['sleep_id'], i])
+      }
+      connection.release()
+      return true
+    } catch (err) {
+      connection.release()
+      throw new Error(err)
+    }
+  }
+
   // music list shuffle
   const musicListShuffle = async () => {
     const connection = await pool.getConnection()
@@ -75,15 +93,16 @@ module.exports = (app) => {
     try {
       await mainListShuffle()
       await videoListShuffle()
+      await sleepListShuffle()
       await musicListShuffle()
     } catch (err) {
       console.log(err)
     }
   })
 
-  // const updateVideo = schedule.scheduleJob('00 * * * * *', async () => {
+  // const updateSleep = schedule.scheduleJob('00 * * * * *', async () => {
   //   try {
-  //     await videoListShuffle()
+  //     await sleepListShuffle()
   //   } catch (err) {
   //     console.log(err)
   //   }
