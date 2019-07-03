@@ -30,11 +30,11 @@
 
   `{ status: 200,`
 
-  `arr: [{ main_id: 3, main_name: "Clouds", main_music: "Clouds.mp3", main_author: "Huma-Huma", main_picture: "7.jpg"},`
+  `arr: [{ main_id: 3, main_name: "Clouds", main_music: "Clouds.mp3", main_author: "Huma-Huma", main_picture: "7.jpg", music_category: "relax" },`
 
-  `{ main_id: 6, main_name: "Go to Sleep My Little One", main_music: "Go_to_Sleep_My_Little_One.mp3", main_author: "Doug Maxwell/Media Right Productions", main_picture: "11.jpg"},`
+  `{ main_id: 6, main_name: "Go to Sleep My Little One", main_music: "Go_to_Sleep_My_Little_One.mp3", main_author: "Doug Maxwell/Media Right Productions", main_picture: "11.jpg", music_category: "relax" },`
 
-  `{ main_id: 11, main_name: "Pachabelly", main_music: "Pachabelly.mp3", main_author: "Aakash Gandhi", main_picture: "16.jpg" }] }`
+  `{ main_id: 11, main_name: "Pachabelly", main_music: "Pachabelly.mp3", main_author: "Aakash Gandhi", main_picture: "16.jpg", music_category: "focus" }] }`
 
   `main_music`이  음악 URL, `main_picture`이 사진 URL이다.
 

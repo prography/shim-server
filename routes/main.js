@@ -40,7 +40,7 @@ module.exports = (app) => {
       let result = []
       let rand = 3
       for (let i=1; i<=rand; i++) {
-        const [temp] = await connection.query('SELECT main_id, main_name, main_music, main_author, main_picture FROM SHIM.MAIN_TB WHERE main_order = ?;', i)
+        const [temp] = await connection.query('SELECT main_id, main_name, main_music, main_author, main_picture, music_category FROM SHIM.MAIN_TB, SHIM.MUSIC_TB WHERE main_order = ? AND MAIN_TB.main_music = MUSIC_TB.music_music;', i)
         result.push(temp[0])
       }
       connection.release()
