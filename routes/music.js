@@ -36,11 +36,11 @@ module.exports = (app) => {
   const updateMyMusic = async (user_id, music_id, my) => {
     try {
       const connection = await pool.getConnection()
-      if (my === 'false') {
+      if (my === 'false' || my === 'False' || my === 0) {
         const result = await connection.query('INSERT INTO SHIM.MY_TB (my_user_id, my_music_id) VALUES (?, ?);', [user_id, music_id])
         connection.release()
         return true
-      } else {
+      } else if (my === 'true' || my === 'True' || my === 1){
         const result = await connection.query('DELETE FROM SHIM.MY_TB WHERE my_user_id = ? AND my_music_id = ?;', [user_id, music_id])
         connection.release()
         return true
