@@ -26,10 +26,10 @@ app.set('pool', pool)
 const indexRouter = require('./routes/index')(app)
 const usersRouter = require('./routes/users')(app)
 const randomRouter = require('./utils/random')(app)
-const options = {
-  key: fs.readFileSync('./keys/private.key'),
-  cert: fs.readFileSync('./keys/public.key')
-}
+// const options = {
+//   key: fs.readFileSync('./keys/private.key'),
+//   cert: fs.readFileSync('./keys/public.key')
+// }
 
 app.use(logger('dev'))
 app.use(express.json())
