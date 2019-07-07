@@ -4,6 +4,7 @@ const path = require('path')
 const cookieParser = require('cookie-parser')
 const logger = require('morgan')
 const mysql = require('mysql2/promise')
+const fs = require('fs')
 
 const app = express()
 
@@ -25,6 +26,10 @@ app.set('pool', pool)
 const indexRouter = require('./routes/index')(app)
 const usersRouter = require('./routes/users')(app)
 const randomRouter = require('./utils/random')(app)
+const options = {
+  key: fs.readFileSync('./keys/private.key'),
+  cert: fs.readFileSync('./keys/public.key')
+}
 
 app.use(logger('dev'))
 app.use(express.json())
