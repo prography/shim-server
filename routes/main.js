@@ -42,7 +42,7 @@ module.exports = (app) => {
         const [temp] = await connection.query('SELECT main_id, main_name, main_music, main_author, main_picture, music_category FROM SHIM.MAIN_TB, SHIM.MUSIC_TB WHERE main_order = ? AND MAIN_TB.main_music = MUSIC_TB.music_music;', i)
         result.push(temp[0])
       }
-      const cnum = await connection.query('SHOW STATUS LIKE "Threads_connected";')
+      connection.release()
       return result
     } catch (err) {
       connection.release()
