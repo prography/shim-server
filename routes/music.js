@@ -9,9 +9,9 @@ module.exports = (app) => {
       const connection = await pool.getConnection()
       let result
       if (category === 'all') { //category가 all일때
-        [result] = await connection.query('SELECT music_id, music_name, music_music, music_author, music_picture, music_category FROM SHIM.MUSIC_TB ORDER BY music_order ASC;')
+        [result] = await connection.query('SELECT music_id, music_name, music_music, music_author, music_picture, music_category, music_time FROM SHIM.MUSIC_TB ORDER BY music_order ASC;')
       } else {      //category가 선택되어있을 때
-        [result] = await connection.query('SELECT music_id, music_name, music_music, music_author, music_picture FROM SHIM.MUSIC_TB WHERE music_category like ? ORDER BY music_order ASC;', category)
+        [result] = await connection.query('SELECT music_id, music_name, music_music, music_author, music_picture, music_time FROM SHIM.MUSIC_TB WHERE music_category like ? ORDER BY music_order ASC;', category)
       }
       connection.release()
       return result
@@ -24,7 +24,7 @@ module.exports = (app) => {
   const selectMyInfo = async (user_id) => {
     try {
       const connection = await pool.getConnection()
-      const result = await connection.query('SELECT music_id, music_name, music_music, music_author, music_picture FROM SHIM.MUSIC_TB, SHIM.MY_TB WHERE MY_TB.my_user_id like ? AND MY_TB.my_music_id = MUSIC_TB.music_id;', [user_id])
+      const result = await connection.query('SELECT music_id, music_name, music_music, music_author, music_picture, music_time FROM SHIM.MUSIC_TB, SHIM.MY_TB WHERE MY_TB.my_user_id like ? AND MY_TB.my_music_id = MUSIC_TB.music_id;', [user_id])
       connection.release()
       return result[0]
     } catch (err) {
