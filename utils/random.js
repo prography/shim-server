@@ -84,6 +84,7 @@ module.exports = (app) => {
       connection.release()
       return true
     } catch (err) {
+      connection.release()
       throw new Error(err)
     }
   }

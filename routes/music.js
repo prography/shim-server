@@ -24,7 +24,6 @@ module.exports = (app) => {
   const selectMyInfo = async (user_id) => {
     const connection = await pool.getConnection()
     try {
-      const connection = await pool.getConnection()
       const result = await connection.query('SELECT music_id, music_name, music_music, music_author, music_picture, music_time FROM SHIM.MUSIC_TB, SHIM.MY_TB WHERE MY_TB.my_user_id like ? AND MY_TB.my_music_id = MUSIC_TB.music_id;', [user_id])
       connection.release()
       return result[0]
