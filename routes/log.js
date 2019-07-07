@@ -9,12 +9,8 @@ module.exports = (app) => {
     try {
       if (event === 'PAGE_CHANGE') { // fragment change log insert
         await connection.query('INSERT INTO SHIM.F_ENTER_LOG_TB (f_enter_log_user_id, f_enter_log_type) VALUES (?, ?);', [user, param])
-        connection.release()
-        return true
       } else if (event === 'HOME_MUSIC_PLAY' || event === 'HOME_MUSIC_STOP') { // home music log insert
         await connection.query('INSERT INTO SHIM.MAIN_LOG_TB (main_log_user_id, main_log_music_id, main_log_action) VALUES (?, ?, ?);', [user, param, event])
-        connection.release()
-        return true
       } else if (event === 'MUSIC_PLAY') { // music play log insert
         params = param.split(',')
         if (params.length === 1) { // params = {music_id}
@@ -25,12 +21,8 @@ module.exports = (app) => {
           parameters = [user, params[0], event, params[1].trim()]
           await connection.query('INSERT INTO SHIM.MUSIC_LOG_TB (music_log_user_id, music_log_music_id, music_log_action, music_log_restart_position) VALUES (?, ?, ?, ?);', parameters)
         }
-        connection.release()
-        return true
       } else if (event === 'MUSIC_PAUSE' || event === 'MUSIC_STOP') { // music pause / stop log insert
         await connection.query('INSERT INTO SHIM.MUSIC_LOG_TB (music_log_user_id, music_log_music_id, music_log_action) VALUES (?, ?, ?);', [user, param, event])
-        connection.release()
-        return true
       } else if (event === 'ASMR_PLAY') { // asmr play log insert
         params = param.split(',')
         if (params.length === 1) { // params = {asmr_id}
@@ -39,23 +31,17 @@ module.exports = (app) => {
           parameters = [user, params[0], event, params[1].trim()]
           await connection.query(`INSERT INTO SHIM.SLEEP_LOG_TB (sleep_log_user_id, sleep_log_sleep_id, sleep_log_action, sleep_log_restart_position) VALUES (?, ?, ?, ?);`, parameters)
         }
-        connection.release()
-        return true
       } else if (event === 'ASMR_PAUSE' || event === 'ASMR_STOP') { // music pause / stop log insert
         await connection.query(`INSERT INTO SHIM.SLEEP_LOG_TB (sleep_log_user_id, sleep_log_sleep_id, sleep_log_action) VALUES (?, ?, ?);`, [user, param, event])
-        connection.release()
-        return true
       } else if (event === 'PLAYLIST_ADD_MUSIC' || event === 'PLAYLIST_REMOVE_MUSIC') { // playlist log insert
         parameters = [user, 0, param, event] // category 0이 music
         await connection.query('INSERT INTO SHIM.PLAYLIST_LOG_TB (playlist_log_user_id, playlist_log_category, playlist_log_music_id, playlist_log_action) VALUES (?, ?, ?, ?);', parameters)
-        connection.release()
-        return true
       } else if (event === 'PLAYLIST_ADD_ASMR' || event === 'PLAYLIST_REMOVE_ASMR') { // playlist log insert
         parameters = [user, 1, param, event] // category 1이 asmr
         await connection.query('INSERT INTO SHIM.PLAYLIST_LOG_TB (playlist_log_user_id, playlist_log_category, playlist_log_music_id, playlist_log_action) VALUES (?, ?, ?, ?);', parameters)
-        connection.release()
-        return true
       }
+      connection.release()
+      return true
     } catch (err) {
       connection.release()
       throw new Error(err)

@@ -43,8 +43,6 @@ module.exports = (app) => {
         result.push(temp[0])
       }
       const cnum = await connection.query('SHOW STATUS LIKE "Threads_connected";')
-      console.log(cnum[0])
-      connection.release()
       return result
     } catch (err) {
       connection.release()
