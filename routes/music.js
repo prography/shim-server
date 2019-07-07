@@ -5,8 +5,8 @@ module.exports = (app) => {
   const pool = app.get('pool')
 
   const selectByCategory = async (category, user_id) => {
+    const connection = await pool.getConnection()
     try {
-      const connection = await pool.getConnection()
       let result
       if (category === 'all') { //category가 all일때
         [result] = await connection.query('SELECT music_id, music_name, music_music, music_author, music_picture, music_category FROM SHIM.MUSIC_TB ORDER BY music_order ASC;')
@@ -22,8 +22,8 @@ module.exports = (app) => {
   }
 
   const selectMyInfo = async (user_id) => {
+    const connection = await pool.getConnection()
     try {
-      const connection = await pool.getConnection()
       const result = await connection.query('SELECT music_id, music_name, music_music, music_author, music_picture FROM SHIM.MUSIC_TB, SHIM.MY_TB WHERE MY_TB.my_user_id like ? AND MY_TB.my_music_id = MUSIC_TB.music_id;', [user_id])
       connection.release()
       return result[0]
@@ -34,8 +34,8 @@ module.exports = (app) => {
   }
 
   const updateMyMusic = async (user_id, music_id, my) => {
+    const connection = await pool.getConnection()
     try {
-      const connection = await pool.getConnection()
       if (my === 'false') {
         const result = await connection.query('INSERT INTO SHIM.MY_TB (my_user_id, my_music_id) VALUES (?, ?);', [user_id, music_id])
         connection.release()

@@ -34,9 +34,8 @@ module.exports = (app) => {
     //   connection.release()
     //   throw new Error(err)
     // }
-
+    const connection = await pool.getConnection()
     try {
-      const connection = await pool.getConnection()
       let result = []
       let rand = 3
       for (let i=1; i<=rand; i++) {

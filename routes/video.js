@@ -5,8 +5,8 @@ module.exports = (app) => {
   const pool = app.get('pool')
 
   const selectByCategory = async (category) => {
+    const connection = await pool.getConnection()
     try {
-      const connection = await pool.getConnection()
       let result
       if (category === 'all') {
         [result] = await connection.query('SELECT video_id, video_url, video_title, video_creator FROM SHIM.VIDEO_TB ORDER BY video_order ASC;')

@@ -6,9 +6,8 @@ module.exports = (app) => {
   const pool = app.get('pool')
 
   const mainListShuffle = async () => {
+    const connection = await pool.getConnection()
     try {
-      const connection = await pool.getConnection()
-
       let numbers = []
       const [temp] = await connection.query('SELECT COUNT(*) FROM SHIM.MAIN_TB;')
       console.log(temp)
