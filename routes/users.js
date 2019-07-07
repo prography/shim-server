@@ -4,8 +4,8 @@ module.exports = (app) => {
   const pool = app.get('pool')
 
   const selectMainId = async (name) => {
+    const connection = await pool.getConnection()
     try {
-      const connection = await pool.getConnection()
       const [result] = await connection.query('SELECT main_id FROM SHIM.MAIN_TB WHERE MAIN_TB.main_name = ?;', [name])
       connection.release()
       return result
@@ -16,8 +16,8 @@ module.exports = (app) => {
   }
 
   const selectMainName = async (id) => {
+    const connection = await pool.getConnection()
     try {
-      const connection = await pool.getConnection()
       const [result] = await connection.query('SELECT main_name FROM SHIM.MAIN_TP WHERE MAIN_TB.main_id = ?;', [id])
       connection.release()
       return result

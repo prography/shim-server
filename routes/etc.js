@@ -5,8 +5,8 @@ module.exports = (app) => {
   const pool = app.get('pool')
 
   const insertFeedback = async (feedback_userid, feedback_contact, feedback_title, feedback_contents) => {
+    const connection = await pool.getConnection()
     try {
-      const connection = await pool.getConnection()
       const params = [feedback_userid, feedback_contact, feedback_title, feedback_contents]
       await connection.query('INSERT INTO SHIM.FEEDBACK_TB (feedback_userid, feedback_contact, feedback_title, feedback_contents) VALUES (?, ?, ?, ?);', params)
       connection.release()

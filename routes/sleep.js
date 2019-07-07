@@ -5,6 +5,7 @@ module.exports = (app) => {
   const pool = app.get('pool')
 
   const selectMusicUrl = async () => {
+    const connection = await pool.getConnection()
     try {
       const connection = await pool.getConnection()
       const [result] = await connection.query('SELECT sleep_id, sleep_music, sleep_name, sleep_picture, sleep_time FROM SHIM.SLEEP_TB ORDER BY sleep_order ASC;')
