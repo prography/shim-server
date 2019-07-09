@@ -49,7 +49,7 @@
 
 # Sleep
 
-'수면' 탭에서 asmr 파일의 id, url, asmr 제목과 사진을 제공한다.
+'수면' 탭에서 asmr 파일의 id, url, asmr 제목, 사진과 asmr 재생 시간을 제공한다.
 
 - **URL**
 
@@ -79,9 +79,9 @@
 
   `{ status : 200,`
 
-  `arr : [{ sleep_id : 1, sleep_music : "fall1.mp3", sleep_name : "새와 밤벌레 울음소리 1", sleep_picture : "33.jpg" },`
+  `arr : [{ sleep_id : 1, sleep_music : "fall1.mp3", sleep_name : "새와 밤벌레 울음소리 1", sleep_msec : 153000, sleep_picture : "33.jpg" },`
 
-  `{ sleep_id : 2, sleep_music : "fall2.mp3", sleep_name : "새와 밤벌레 울음소리 2", sleep_picture : "28.jgp" }] }` 
+  `{ sleep_id : 2, sleep_music : "fall2.mp3", sleep_name : "새와 밤벌레 울음소리 2", sleep_msec : 198000, sleep_picture : "28.jpg" }] }` 
 
   * ASMR URL: sleep_music
 
@@ -152,7 +152,7 @@
 
 # Music
 
-'음악' 탭에서 음악 id, 음악 파일의 url, 사진의 url, 음악 제작자, 음악 제목과 해당 음악이 my에 추가 되었는지 아닌지 여부를 제공한다.
+'음악' 탭에서 음악 id, 음악 파일의 url, 사진의 url, 음악 제작자, 음악 제목, 음악 재생 시간과 해당 음악이 my에 추가 되었는지 아닌지 여부를 제공한다.
 
 - **URL**
 
@@ -188,9 +188,9 @@
 
   `{ status : 200,`
 
-  `arr : [{ music_id : 2, music_name : "White River", music_music : "White_River.mp3", music_author : "Aakash Gandhi", music_picture : "11.jpg", my : false},`
+  `arr : [{ music_id : 2, music_name : "White River", music_music : "White_River.mp3", music_author : "Aakash Gandhi", music_picture : "11.jpg", music_msec : 15300, my : false},`
 
-  `{ music_id : 4, music_name : "Simple Sonata", music_music : "Simple_Sonata.mp3", music_author : "Sir Cubworth", music_picture : "15.jpg", my : false }] }`
+  `{ music_id : 4, music_name : "Simple Sonata", music_music : "Simple_Sonata.mp3", music_author : "Sir Cubworth", music_picture : "15.jpg", music_msec : 189000, my : false }] }`
 
   `music_music`이  음악 URL, `music_picture`이 사진 URL이다.
 

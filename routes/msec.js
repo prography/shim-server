@@ -14,7 +14,6 @@ module.exports = (app) => {
         const s = parseInt(h_m_s[2])
         const msec = (h * 3600 + m * 60 + s) * 1000
         const params = [msec, parseInt(i)+1]
-        console.log(params)
         await connection.query('UPDATE SHIM.MUSIC_TB SET music_msec=? WHERE music_id=?;', params)
       }
       connection.release()
