@@ -9,8 +9,6 @@ module.exports = (app) => {
     const connection = await pool.getConnection()
     try {
       let numbers = []
-      const [temp] = await connection.query('SELECT COUNT(*) FROM SHIM.MAIN_TB;')
-      console.log(temp)
       const count = temp[0]['COUNT(*)']
 
       for (let i=0; i<count; i++) {//1~열개수 사이의 값을 겹치지 않고 랜덤하게 저장
@@ -27,24 +25,6 @@ module.exports = (app) => {
         await connection.query('UPDATE SHIM.MAIN_TB SET main_order = ? WHERE main_id = ?;', [numbers[i-1], i])
       }
 
-      connection.release()
-      return true
-    } catch (err) {
-      connection.release()
-      throw new Error(err)
-    }
-  }
-
-  // video list shuffle
-  const videoListShuffle = async () => {
-    const connection = await pool.getConnection()
-    try {
-      let [temp] = await connection.query('SELECT VIDEO_TB.video_id FROM SHIM.VIDEO_TB;') // video_id만 불러옴
-      temp.sort(function(a, b){return 0.5 - Math.random()}); // video_id 랜덤하게 정렬
-
-      for (let i=1; i<=temp.length; i++) {
-        await connection.query('UPDATE SHIM.VIDEO_TB SET video_order=? WHERE video_id=?', [temp[i-1]['video_id'], i])//music_order에 랜덤값 저장
-      }
       connection.release()
       return true
     } catch (err) {
@@ -92,7 +72,6 @@ module.exports = (app) => {
   const update = schedule.scheduleJob('00 00 00 * * *', async () => {
     try {
       await mainListShuffle()
-      await videoListShuffle()
       await sleepListShuffle()
       await musicListShuffle()
     } catch (err) {
@@ -102,7 +81,9 @@ module.exports = (app) => {
 
   // const updateSleep = schedule.scheduleJob('00 * * * * *', async () => {
   //   try {
+  //     await mainListShuffle()
   //     await sleepListShuffle()
+  //     await musicListShuffle()
   //   } catch (err) {
   //     console.log(err)
   //   }
