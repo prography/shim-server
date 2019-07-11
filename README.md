@@ -95,56 +95,6 @@
 
 
 
-
-
-
-
-# Video
-
-'영상' 탭에서 영상 id, 영상 url, 영상 제목, 영상 제작자 정보를 제공한다.
-
-- **URL**
-
-  /video/:category
-
-  - category에는 all / baby / animal이 있다.
-
-    ​	( EX. /video/all )
-
-- **Method**
-
-  `GET`
-
-- **Header Params**
-
-  None
-
-- **URL Params**
-
-  None
-
-- **Data Params**
-
-  None
-
-- **Success Response**
-
-  **Code**: 200
-
-  **Content**:
-
-  `/video/baby`에 대한 결과 :
-
-  `{ status : 200,`
-
-  `arr : [{ video_id : 2, video_url : "w-N8FWyNZzk", video_title : "[60초 에디터Pick] 댕댕이보다 더 댕댕이 같은 건후ㅋㅋㅋㅋ", video_creator : "KBS 한국방송 (MyloveKBS)" },`
-
-  `{ video_id : 4, video_url : "VDc3kb14YsU", video_title : "[HIT] 설특집 슈퍼맨이 돌아왔다 - 다시보는 '성균관 삼둥이' 귀여움 폭발 2. 20150219", video_creator : "KBSEntertain" }] }`
-
-  video_url이 유튜브 링크이며, 실제 주소는 https://youtu.be/(video_url_값) 형식이다.
-
-  EX. https://youtu.be/w-N8FWyNZzk
-
 ---
 
 
@@ -333,13 +283,3 @@ log를 저장한다.
   **Content**:
 
   `{ status: 200, msg: "ok" }`
-
----
-
-
-
-# 참고
-
-test IP: 52.78.106.14
-
-main IP: 13.124.230.126
