@@ -53,6 +53,9 @@ module.exports = (app) => {
       const user = req.body.user
       const event = req.body.event
       const params = req.body.params
+      console.log(user)
+      console.log(event)
+      console.log(params)
       await insertLog(user, event, params)
       res.status(200).json({ 'status': 200, 'msg': 'ok' })
     } catch (err) {
