@@ -48,6 +48,18 @@ module.exports = (app) => {
     }
   }
 
+  const insertUser = async (user) => {
+    const connection = await pool.getConnection();
+    try {
+      await connection.query('INSERT INTO SHIM.USER_TB (user_u_id) VALUES (?);', [user])
+      connection.release()
+      return true
+    } catch (err) {
+      connection.release()
+      throw new Error()
+    }
+  }
+
   router.post('/', async (req, res) => {
     try {
       const user = req.body.user
@@ -56,6 +68,7 @@ module.exports = (app) => {
       console.log(user)
       console.log(event)
       console.log(params)
+      await insertUser(user)
       await insertLog(user, event, params)
       res.status(200).json({ 'status': 200, 'msg': 'ok' })
     } catch (err) {
