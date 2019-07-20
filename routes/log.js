@@ -65,9 +65,11 @@ module.exports = (app) => {
       const user = req.body.user
       const event = req.body.event
       const params = req.body.params
-      console.log(user)
-      console.log(event)
-      console.log(params)
+      const today = new Date()
+      const date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+      const time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+      const dateTime = date+' '+time;
+      console.log(dateTime + ' | req.body.user: ' + req.body.user + ', req.body.event: ' + req.body.event + ', req.body.params: ' + req.body.params)
       await insertUser(user)
       await insertLog(user, event, params)
       res.status(200).json({ 'status': 200, 'msg': 'ok' })
