@@ -69,7 +69,7 @@ module.exports = (app) => {
     }
   }
 
-  const update = schedule.scheduleJob('00 00 00 * * *', async () => {
+  const update = schedule.scheduleJob('00 05 00 * * *', async () => {
     try {
       await mainListShuffle()
       await sleepListShuffle()
@@ -78,7 +78,7 @@ module.exports = (app) => {
       console.log(err)
     }
   })
-
+  update()
   // const updateSleep = schedule.scheduleJob('00 * * * * *', async () => {
   //   try {
   //     await mainListShuffle()
