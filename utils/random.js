@@ -5,26 +5,16 @@ module.exports = (app) => {
   const router = express.Router()
   const pool = app.get('pool')
 
+  // main list shuffle
   const mainListShuffle = async () => {
     const connection = await pool.getConnection()
     try {
-      let numbers = []
-      const count = temp[0]['COUNT(*)']
+      let [temp] = await connection.query('SELECT MAIN_TB.main_id FROM SHIM.MAIN_TB;')
+      temp.sort(function(a, b){return 0.5 - Math.random()});
 
-      for (let i=0; i<count; i++) {//1~열개수 사이의 값을 겹치지 않고 랜덤하게 저장
-        numbers[i] = Math.floor(Math.random() * count) + 1
-        for (let j=0; j<i; j++) {
-          if (numbers[i] == numbers[j]) {
-            i = i-1;
-            break;
-          }
-        }
+      for (let i=1; i<=temp.length; i++) {
+        await connection.query('UPDATE SHIM.MAIN_TB SET main_order=? WHERE main_id=?', [temp[i-1]['main_id'], i])
       }
-
-      for (let i=1; i<=count; i++) {
-        await connection.query('UPDATE SHIM.MAIN_TB SET main_order = ? WHERE main_id = ?;', [numbers[i-1], i])
-      }
-
       connection.release()
       return true
     } catch (err) {
@@ -69,7 +59,7 @@ module.exports = (app) => {
     }
   }
 
-  const update = schedule.scheduleJob('00 05 00 * * *', async () => {
+  const update = schedule.scheduleJob('0 40 15 * * *', async () => {
     try {
       await mainListShuffle()
       await sleepListShuffle()
@@ -78,7 +68,6 @@ module.exports = (app) => {
       console.log(err)
     }
   })
-  update()
   // const updateSleep = schedule.scheduleJob('00 * * * * *', async () => {
   //   try {
   //     await mainListShuffle()
