@@ -1,6 +1,5 @@
 {
     "env": {
-        "browser": true,
         "commonjs": true,
         "es6": true
     },
@@ -10,7 +9,7 @@
         "SharedArrayBuffer": "readonly"
     },
     "parserOptions": {
-        "ecmaVersion": 2018
+        "ecmaVersion": 2020
     },
     "rules": {
     }
