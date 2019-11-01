@@ -26,13 +26,13 @@ module.exports = (app) => {
       } else if (event === 'ASMR_PLAY') { // asmr play log insert
         params = param.split(',')
         if (params.length === 1) { // params = {asmr_id}
-          await connection.query(`INSERT INTO SHIM.SLEEP_LOG_TB (sleep_log_user_id, sleep_log_sleep_id, sleep_log_action) VALUES (?, ?, ?);`, [user, param, event])
+          await connection.query('INSERT INTO SHIM.SLEEP_LOG_TB (sleep_log_user_id, sleep_log_sleep_id, sleep_log_action) VALUES (?, ?, ?);', [user, param, event])
         } else { // params = {asmr_id}, {position}
           parameters = [user, params[0], event, params[1].trim()]
-          await connection.query(`INSERT INTO SHIM.SLEEP_LOG_TB (sleep_log_user_id, sleep_log_sleep_id, sleep_log_action, sleep_log_restart_position) VALUES (?, ?, ?, ?);`, parameters)
+          await connection.query('INSERT INTO SHIM.SLEEP_LOG_TB (sleep_log_user_id, sleep_log_sleep_id, sleep_log_action, sleep_log_restart_position) VALUES (?, ?, ?, ?);', parameters)
         }
       } else if (event === 'ASMR_PAUSE' || event === 'ASMR_STOP') { // music pause / stop log insert
-        await connection.query(`INSERT INTO SHIM.SLEEP_LOG_TB (sleep_log_user_id, sleep_log_sleep_id, sleep_log_action) VALUES (?, ?, ?);`, [user, param, event])
+        await connection.query('INSERT INTO SHIM.SLEEP_LOG_TB (sleep_log_user_id, sleep_log_sleep_id, sleep_log_action) VALUES (?, ?, ?);', [user, param, event])
       } else if (event === 'PLAYLIST_ADD_MUSIC' || event === 'PLAYLIST_REMOVE_MUSIC') { // playlist log insert
         parameters = [user, 0, param, event] // category 0이 music
         await connection.query('INSERT INTO SHIM.PLAYLIST_LOG_TB (playlist_log_user_id, playlist_log_category, playlist_log_music_id, playlist_log_action) VALUES (?, ?, ?, ?);', parameters)
@@ -49,7 +49,7 @@ module.exports = (app) => {
   }
 
   const insertUser = async (user) => {
-    const connection = await pool.getConnection();
+    const connection = await pool.getConnection()
     try {
       await connection.query('INSERT INTO SHIM.USER_TB (user_u_id) VALUES (?);', [user])
       connection.release()
@@ -66,15 +66,15 @@ module.exports = (app) => {
       const event = req.body.event
       const params = req.body.params
       const today = new Date()
-      const date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
-      const time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
-      const dateTime = date+' '+time;
+      const date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate()
+      const time = today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds()
+      const dateTime = date + ' ' + time
       console.log(dateTime + ' | req.body.user: ' + req.body.user + ', req.body.event: ' + req.body.event + ', req.body.params: ' + req.body.params)
       await insertUser(user)
       await insertLog(user, event, params)
-      res.status(200).json({ 'status': 200, 'msg': 'ok' })
+      res.status(200).json({ status: 200, msg: 'ok' })
     } catch (err) {
-      res.status(500).json({ 'status': 500, 'msg': 'error!' })
+      res.status(500).json({ status: 500, msg: 'error!' })
     }
   })
 

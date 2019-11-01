@@ -26,9 +26,9 @@ module.exports = (app) => {
 
       await insertFeedback(feedback_userid, feedback_contact, feedback_title, feedback_contents)
 
-      res.status(200).json({ 'status': 200, 'msg': 'ok' })
+      res.status(200).json({ status: 200, msg: 'ok' })
     } catch (err) {
-      res.status(500).json({ 'status': 500, 'msg': 'error!' })
+      res.status(500).json({ status: 500, msg: 'error!' })
     }
   })
 

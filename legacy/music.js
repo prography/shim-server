@@ -8,9 +8,9 @@ module.exports = (app) => {
     const connection = await pool.getConnection()
     try {
       let result
-      if (category === 'all') { //category가 all일때
+      if (category === 'all') { // category가 all일때
         [result] = await connection.query('SELECT music_id, music_name, music_music, music_author, music_picture, music_category, music_msec FROM SHIM.MUSIC_TB ORDER BY music_order ASC;')
-      } else {      //category가 선택되어있을 때
+      } else { // category가 선택되어있을 때
         [result] = await connection.query('SELECT music_id, music_name, music_music, music_author, music_picture, music_msec FROM SHIM.MUSIC_TB WHERE music_category like ? ORDER BY music_order ASC;', category)
       }
       connection.release()
@@ -51,7 +51,6 @@ module.exports = (app) => {
     }
   }
 
-
   router.get('/:category', async (req, res) => {
     try {
       const category = req.params.category // all, my, relax, focus
@@ -62,9 +61,9 @@ module.exports = (app) => {
       } else {
         result = await selectByCategory(category, user_id)
         const my_result = await selectMyInfo(user_id)
-        for (let i in result) { // my에 추가되어 있는 music_i이면 true, 아니면 false
+        for (const i in result) { // my에 추가되어 있는 music_i이면 true, 아니면 false
           result[i].my = false
-          for (let j in my_result) {
+          for (const j in my_result) {
             if (result[i].music_id === my_result[j].music_id) {
               result[i].my = true
               break
@@ -73,9 +72,9 @@ module.exports = (app) => {
           }
         }
       }
-      res.status(200).json({ 'status': 200, 'arr': result }) // arr, data, msg
+      res.status(200).json({ status: 200, arr: result }) // arr, data, msg
     } catch (err) {
-      res.status(500).json({ 'status': 500, 'msg': 'error!' })
+      res.status(500).json({ status: 500, msg: 'error!' })
     }
   })
 
@@ -85,9 +84,9 @@ module.exports = (app) => {
       const music_id = req.body.music_id
       const my = req.body.my
       await updateMyMusic(user_id, music_id, my)
-      res.status(200).json({ 'status': 200, 'msg': 'ok!' })
+      res.status(200).json({ status: 200, msg: 'ok!' })
     } catch (err) {
-      res.status(500).json({ 'status': 500, 'msg': 'error!' })
+      res.status(500).json({ status: 500, msg: 'error!' })
     }
   })
 

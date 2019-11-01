@@ -31,9 +31,9 @@ module.exports = (app) => {
     const name = req.params.name
     try {
       const result = await selectMainId(name)
-      res.status(200).json({ 'status': 200, 'arr': result }) // arr, data, msg
+      res.status(200).json({ status: 200, arr: result }) // arr, data, msg
     } catch (err) {
-      res.status(500).json({ 'status': 500, 'msg': 'error!' })
+      res.status(500).json({ status: 500, msg: 'error!' })
     }
   })
 
@@ -41,9 +41,9 @@ module.exports = (app) => {
     const id = req.body.id
     try {
       const result = await selectMainName(id)
-      res.status(201).json({ 'status': 201, 'arr': result })
+      res.status(201).json({ status: 201, arr: result })
     } catch (err) {
-      res.status(500).json({ 'status': 500, 'msg': 'error!' })
+      res.status(500).json({ status: 500, msg: 'error!' })
     }
   })
 

@@ -25,9 +25,9 @@ module.exports = (app) => {
     const category = req.params.category // all, sleep, instrument, nature
     try {
       const result = await selectByCategory(category)
-      res.status(200).json({ 'status': 200, 'arr': result }) // arr, data, msg
+      res.status(200).json({ status: 200, arr: result }) // arr, data, msg
     } catch (err) {
-      res.status(500).json({ 'status': 500, 'msg': 'error!' })
+      res.status(500).json({ status: 500, msg: 'error!' })
     }
   })
 
