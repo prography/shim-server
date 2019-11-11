@@ -4,6 +4,11 @@ module.exports = (app) => {
   const router = express.Router()
   const pool = app.get('pool')
   const {OAuth2Client} = require('google-auth-library')
+  const jwt = require('jsonwebtoken')
+
+  const CLIENT_ID = process.env.CLIENT_ID
+  const tokenKey = process.env.TOKEN_KEY
+  const client = new OAuth2Client(CLIENT_ID)
 
   const verify = async (token) => {
     try {
@@ -37,14 +42,31 @@ module.exports = (app) => {
     }
   }
 
+  /*router.get('/:userid', async (req, res) => {
+    try {
+      const userid = req.params.userid
+      const payload = {'uid':userid}
+      console.log(payload)
+      res.status(200).json({ 'status': 200, 'msg': 'ok!' }) // arr, data, msg
+    } catch (err) {
+      res.status(500).json({ 'status': 500, 'msg': 'error!' })
+    }
+  })*/
+
 
   router.post('/', async (req, res) => {
     try {
-      const token = req.body.token
-      userid = await verify(token)
+      const googleToken = req.body.googleToken
+      userid = await verify(googleToken) // verify가 통과 안 되면 어떻게 되는 거지?
       await registerId(userid)
 
-      res.status(200).json({ 'status': 200, 'msg': 'ok!' })
+      const payLoad = { 'uid' : userid }
+      const userToken = jwt.sign(payLoad,tokenKey,{
+        algorithm : 'HS256',
+        expiresInMinutes : 1440 //expires in 24 hours
+      })
+
+      res.status(200).json({ 'status': 200, 'arr': userToken })
     } catch (err) {
       res.status(500).json({ 'status': 500, 'msg': 'error!' })
     }

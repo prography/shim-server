@@ -9,6 +9,7 @@ module.exports = (app) => {
   router.use('/log', require('./log')(app))
   router.use('/etc', require('./etc')(app))
   router.use('/msec', require('./msec')(app))
+  router.use('/login', require('./login')(app))
 
   return router
 }
