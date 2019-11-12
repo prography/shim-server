@@ -63,7 +63,7 @@ module.exports = (app) => {
       const payLoad = { 'uid' : userid }
       const userToken = jwt.sign(payLoad,tokenKey,{
         algorithm : 'HS256',
-        expiresInMinutes : 1440 //expires in 24 hours
+        expiresInMinutes : '365d' //expires in 365 days
       })
 
       res.status(200).json({ 'status': 200, 'arr': userToken })
