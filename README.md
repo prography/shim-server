@@ -283,3 +283,52 @@ log를 저장한다.
   **Content**:
 
   `{ status: 200, msg: "ok" }`
+
+
+
+
+
+---
+
+
+
+# Login
+
+google token을 받아와 user id를 유효한 토큰으로 바꿔서 보내준다.
+
+- **URL**
+
+  /login
+
+- **Method**
+
+  `POST`
+
+- **Header Params**
+
+  None
+
+- **URL Params**
+
+  None
+
+- **Data Params**
+
+  `googleToken` : VARCHAR
+
+- **Success Response**
+
+  **Code**: 200
+
+  **Content**:
+
+  `{ status : 200,
+      arr : "eyJhbGciOiJIUzI1NiIsInR~~UxNDgsImV4cCI6MTYwNTE2MTE0OH0.r5kbvalNvh1SZiZNsgK1PwqK5As6NzoS4drYR3WWixE"
+  }`
+
+
+
+
+
+------
+
