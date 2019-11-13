@@ -10,6 +10,10 @@ const users = require('./users');
 
 const router = Router();
 
+const pong = (req, res) => res.send('pong');
+
+router.get('/ping', pong);
+
 router.use('/authors', authors);
 router.use('/feedback', feedback);
 router.use('/logs', logs);

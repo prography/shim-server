@@ -1,4 +1,62 @@
 class Subscription {
+  static get Builder() {
+    return class {
+      constructor() {
+        this.id = -1;
+        this.planId = -1;
+        this.userId = -1;
+        this.valid = false;
+        this.startedAt = null;
+        this.endedAt = null;
+        this.canceledAt = null;
+      }
+
+      setId(id) {
+        this.id = id;
+        return this;
+      }
+
+      setPlanId(planId) {
+        this.planId = planId;
+        return this;
+      }
+
+      setUserId(userId) {
+        this.userId = userId;
+        return this;
+      }
+
+      setValid(valid) {
+        this.valid = valid;
+        return this;
+      }
+
+      setStartedAt(startedAt) {
+        this.startedAt = startedAt;
+        return this;
+      }
+
+      setEndedAt(endedAt) {
+        this.endedAt = endedAt;
+        return this;
+      }
+
+      setCanceledAt(canceledAt) {
+        this.canceledAt = canceledAt;
+        return this;
+      }
+
+      build() {
+        const {
+          id, planId, userId,
+          valid,
+          startedAt, endedAt, canceledAt,
+        } = this;
+        return new Subscription(id, planId, userId, valid, startedAt, endedAt, canceledAt);
+      }
+    };
+  }
+
   /**
    * @param {number} id 구독 아이디
    * @param {number} planId 상품 아이디
@@ -16,6 +74,23 @@ class Subscription {
     this.startedAt = startedAt;
     this.endedAt = endedAt;
     this.canceledAt = canceledAt;
+  }
+
+  toJSON() {
+    const {
+      id, planId, userId,
+      valid,
+      startedAt, endedAt, canceledAt,
+    } = this;
+    return {
+      id,
+      planId,
+      userId,
+      valid,
+      startedAt,
+      endedAt,
+      canceledAt,
+    };
   }
 }
 
