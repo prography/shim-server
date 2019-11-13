@@ -5,4 +5,6 @@ const router = Router();
 
 router.post('/', UserController.createAccount);
 
+router.post('/auth', UserController.login);
+
 module.exports = Router;
