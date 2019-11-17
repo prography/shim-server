@@ -1,9 +1,9 @@
 const { Router } = require('express');
-const AuthorController = require('../controllers/AuthorController');
+const authors = require('../controllers/authors');
 
 const router = Router();
 
-router.get('/', AuthorController.getInformations);
-router.get('/:id', AuthorController.getInformation);
+router.get('/', authors.getAuthors);
+router.get('/:id', authors.getAuthor);
 
 module.exports = Router;

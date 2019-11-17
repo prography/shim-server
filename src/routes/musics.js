@@ -1,9 +1,10 @@
 const { Router } = require('express');
-const MusicController = require('../controllers/MusicController');
+const musics = require('../controllers/musics');
+const handleAsync = require('../utils/routes');
 
 const router = Router();
 
-router.get('/', MusicController.getInformations);
-router.get('/:id', MusicController.getInformation);
+router.get('/', handleAsync(musics.getMusics));
+router.get('/:id', handleAsync(musics.getMusic));
 
 module.exports = Router;

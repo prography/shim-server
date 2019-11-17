@@ -10,17 +10,17 @@ const users = require('./users');
 
 const router = Router();
 
-const pong = (req, res) => res.send('pong');
+const pong = (_, res) => res.send('pong');
 
 router.get('/ping', pong);
 
-// router.use('/authors', authors);
+router.use('/authors', authors);
 // router.use('/feedback', feedback);
 // router.use('/logs', logs);
 router.use('/me', me);
-// router.use('/musics', musics);
-// router.use('/plans', plans);
-// router.use('/shims', shims);
+router.use('/musics', musics);
+router.use('/plans', plans);
+router.use('/shims', shims);
 router.use('/users', users);
 
 module.exports = router;
