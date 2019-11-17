@@ -1,10 +1,9 @@
 const { Router } = require('express');
-const UserController = require('../controllers/UserController');
+const users = require('../controllers/users');
+const handleAsync = require('../utils/routes');
 
 const router = Router();
 
-router.post('/', UserController.createAccount);
-
-router.post('/auth', UserController.login);
+router.post('/auth', handleAsync(users.login));
 
 module.exports = Router;

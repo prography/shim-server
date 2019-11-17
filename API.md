@@ -14,6 +14,22 @@ Input:
 { token }
 ```
 
+### POST /users/auth
+
+로그인합니다.
+
+Headers:
+
+```js
+{ Authorization: googleToken }
+```
+
+Output:
+
+```js
+{ token } // JWT
+```
+
 ### GET /me
 
 사용자 정보를 가져옵니다.
@@ -44,22 +60,6 @@ Output:
 
 ```js
 { email, name, deviceId }
-```
-
-### PUT /me
-
-사용자 정보를 수정합니다.
-
-Headers:
-
-```js
-{ Authorization: uid }
-```
-
-Output:
-
-```js
-{ email, name, deviceId } // 모든 값이 존재해야 됨
 ```
 
 ### DELETE /me
@@ -189,7 +189,7 @@ Output:
 Output:
 
 ```js
-[{ id, authorId, title, category, thumbnail, duration, createdAt }]
+[{ id, authorId, title, category, description, thumbnail, duration, createdAt }]
 ```
 
 ### GET /shims/{id}
@@ -199,7 +199,7 @@ Output:
 Output:
 
 ```js
-{ id, authorId, title, category, thumbnail, duration, createdAt }
+{ id, authorId, title, category, description, thumbnail, duration, createdAt }
 ```
 
 ## Logs
