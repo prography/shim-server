@@ -1,7 +1,7 @@
 const { Router } = require('express');
 const users = require('../controllers/users');
 const { verifyToken } = require('../middlewares/auth');
-const handleAsync = require('../utils/routes');
+const { handleAsync } = require('../utils/routes');
 
 const router = Router();
 
