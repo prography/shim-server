@@ -10,7 +10,7 @@ const users = require('./users');
 
 const router = Router();
 
-const pong = (_, res) => res.send('pong');
+const pong = (_, res) => res.set('Content-Type', 'text/plain').send('pong');
 
 router.get('/ping', pong);
 
