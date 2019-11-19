@@ -23,7 +23,7 @@ const disableUser = async (uid) => {
  * @param {string} googleToken
  * @returns {string} JWT
  */
-const login = (googleToken) => new Promise(async (resolve, reject) => {
+const login = async (googleToken) => {
   const oAuth2Client = new OAuth2Client(OAUTH_CLIENT_ID);
   const ticket = oAuth2Client.verifyIdToken({ idToken: googleToken, audience: OAUTH_CLIENT_ID });
   const payload = ticket.getPayload();
@@ -31,14 +31,9 @@ const login = (googleToken) => new Promise(async (resolve, reject) => {
   if (!await userRepository.exists(uid)) {
     await userRepository.create(uid);
   }
-  jwt.sign({ uid }, JWT_SECRET, JWT_OPTIONS, (err, token) => {
-    if (token) {
-      resolve(token);
-    } else {
-      reject(err);
-    }
-  });
-});
+  const token = jwt.sign({ uid }, JWT_SECRET, JWT_OPTIONS);
+  return token;
+};
 
 /**
  * @param {string} uid

@@ -13,7 +13,10 @@ const create = async (planId, uid) => {
       SELECT user_id FROM users WHERE uid = ?,
       1,
       NOW(),
-      DATE_ADD(NOW(), INTERVAL (SELECT duration FROM plans WHERE id = ?) DAY)
+      DATE_ADD(
+        NOW(),
+        INTERVAL (SELECT duration FROM plans WHERE id = ?) DAY
+      )
     )
     `, [planId, uid, planId]);
 };

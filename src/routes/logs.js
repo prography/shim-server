@@ -1,10 +1,10 @@
 const { Router } = require('express');
-// const LogController = require('../controllers/LogController');
+const logs = require('../controllers/logs');
 
 const router = Router();
 
-// router.post('/music', LogController.saveMusicLog);
-// router.post('/shim', LogController.saveShimLog);
-// router.post('/ui', LogController.saveUiLog);
+router.post('/music', logs.saveMusicLog);
+router.post('/shim', logs.saveShimLog);
+router.post('/ui', logs.saveUiLog);
 
 module.exports = Router;
