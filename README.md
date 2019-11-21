@@ -1,3 +1,9 @@
+# Shim Server
+
+> Healing Music Player App Server
+
+[![JavaScript Style Guide](https://cdn.rawgit.com/standard/standard/master/badge.svg)](https://github.com/standard/standard)
+
 # Main
 
 '홈' 탭에서 랜덤으로 3개의 main id, 음악 파일의 url, 사진의 url, 음악 제목, 음악 제작자를 제공한다.

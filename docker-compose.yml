@@ -1,0 +1,22 @@
+version: '3'
+
+services:
+  db:
+    image: mysql:8
+    volumes:
+      - db_data:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: hello_shim!
+      MYSQL_DATABASE: shim
+      MYSQL_USER: shim
+      MYSQL_PASSWORD: shim
+
+  shim:
+    depends_on:
+     - db
+    image: shim:latest
+    ports:
+     - "3000:80"
+
+volumes:
+  db_data:
