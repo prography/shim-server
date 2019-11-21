@@ -10,7 +10,7 @@
 
 Input:
 
-```js
+```text
 { token }
 ```
 
@@ -20,13 +20,13 @@ Input:
 
 Headers:
 
-```js
-{ Authorization: idToken }
+```text
+{ Authorization: Bearer idToken }
 ```
 
 Output:
 
-```js
+```text
 { token } // JWT
 ```
 
@@ -36,13 +36,13 @@ Output:
 
 Headers:
 
-```js
-{ Authorization: uid }
+```text
+{ Authorization: Bearer JWT }
 ```
 
 Output:
 
-```js
+```text
 { email, name, status, deviceId }
 ```
 
@@ -52,13 +52,13 @@ Output:
 
 Headers:
 
-```js
-{ Authorization: uid }
+```text
+{ Authorization: Bearer JWT }
 ```
 
 Output:
 
-```js
+```text
 { email, name, deviceId }
 ```
 
@@ -68,8 +68,8 @@ Output:
 
 Headers:
 
-```js
-{ Authorization: uid }
+```text
+{ Authorization: Bearer JWT }
 ```
 
 ### POST /me/subscription
@@ -78,13 +78,13 @@ Headers:
 
 Headers:
 
-```js
-{ Authorization: uid }
+```text
+{ Authorization: Bearer JWT }
 ```
 
 Input:
 
-```js
+```text
 { planId }
 ```
 
@@ -94,13 +94,13 @@ Input:
 
 Headers:
 
-```js
-{ Authorization: uid }
+```text
+{ Authorization: Bearer JWT }
 ```
 
 Output:
 
-```js
+```text
 { name, cost, duration, startedAt, endedAt } || {}
 ```
 
@@ -110,8 +110,8 @@ Output:
 
 Headers:
 
-```js
-{ Authorization: uid }
+```text
+{ Authorization: Bearer JWT }
 ```
 
 ## Authors
@@ -122,7 +122,7 @@ Headers:
 
 Output:
 
-```js
+```text
 [{ id, email, name, profile, about }]
 ```
 
@@ -132,7 +132,7 @@ Output:
 
 Output:
 
-```js
+```text
 { id, email, name, profile, about }
 ```
 
@@ -144,7 +144,7 @@ Output:
 
 Output:
 
-```js
+```text
 [{ id, name, cost, duration }]
 ```
 
@@ -154,7 +154,7 @@ Output:
 
 Output:
 
-```js
+```text
 { id, name, cost, duration }
 ```
 
@@ -166,7 +166,7 @@ Output:
 
 Output:
 
-```js
+```text
 [{ id, authorId, title, category, thumbnail, duration, createdAt }]
 ```
 
@@ -176,7 +176,7 @@ Output:
 
 Output:
 
-```js
+```text
 { id, authorId, title, category, thumbnail, duration, createdAt }
 ```
 
@@ -188,7 +188,7 @@ Output:
 
 Output:
 
-```js
+```text
 [{ id, authorId, title, category, description, thumbnail, duration, createdAt }]
 ```
 
@@ -198,7 +198,7 @@ Output:
 
 Output:
 
-```js
+```text
 { id, authorId, title, category, description, thumbnail, duration, createdAt }
 ```
 
@@ -210,13 +210,13 @@ Output:
 
 Headers:
 
-```js
-{ Authorization: uid }
+```text
+{ Authorization: Bearer JWT }
 ```
 
 Input:
 
-```js
+```text
 { musicId, action, createdAt }
 ```
 
@@ -226,13 +226,13 @@ Input:
 
 Headers:
 
-```js
-{ Authorization: uid }
+```text
+{ Authorization: Bearer JWT }
 ```
 
 Input:
 
-```js
+```text
 { shimId, action, createdAt }
 ```
 
@@ -242,13 +242,13 @@ UI 로그을 저장합니다.
 
 Headers:
 
-```js
-{ Authorization: uid }
+```text
+{ Authorization: Bearer JWT }
 ```
 
 Input:
 
-```js
+```text
 { action, createdAt }
 ```
 
@@ -260,12 +260,12 @@ Input:
 
 Headers:
 
-```js
-{ Authorization: uid }
+```text
+{ Authorization: Bearer JWT }
 ```
 
 Input:
 
-```js
+```text
 { title, content, createdAt }
 ```

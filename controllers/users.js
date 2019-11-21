@@ -29,8 +29,6 @@ const login = async (req, res) => {
     }
     const token = await service.login(idToken);
     res.json({ token });
-  } else {
-    next(new Error())
   }
 };
 

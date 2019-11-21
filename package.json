@@ -21,10 +21,10 @@
     "nodemon": "^1.19.4"
   },
   "scripts": {
-    "dev": "nodemon src",
+    "dev": "nodemon server",
     "lint": "eslint --ignore-path .gitignore .",
     "lint:fix": "eslint --fix --ignore-path .gitignore .",
-    "start": "node src",
+    "start": "node server",
     "test": "mocha --timeout 10000"
   },
   "repository": {
