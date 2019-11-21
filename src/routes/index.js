@@ -12,7 +12,7 @@ const router = Router();
 
 const pong = (_, res) => res.set('Content-Type', 'text/plain').send('pong');
 
-router.get('/ping', pong);
+router.all('/ping', pong);
 
 router.use('/authors', authors);
 router.use('/feedback', feedback);

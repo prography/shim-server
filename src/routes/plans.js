@@ -7,4 +7,4 @@ const router = Router();
 router.get('/', handleAsync(plans.getPlans));
 router.get('/:id', handleAsync(plans.getPlan));
 
-module.exports = Router;
+module.exports = router;

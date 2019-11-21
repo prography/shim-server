@@ -8,16 +8,6 @@ const disableUser = async (req, res) => {
   res.end();
 };
 
-const login = async (req, res) => {
-  const schema = req.header('Authorization');
-  const googleToken = schema; // todo: check schema
-  if (NODE_ENV === 'development') {
-    console.log('google token', googleToken);
-  }
-  const token = await service.login(googleToken);
-  res.json({ token });
-};
-
 const getUser = async (req, res) => {
   const { token } = req;
   const user = await service.getUser(token.uid);
@@ -28,6 +18,20 @@ const getSubscription = async (req, res) => {
   const { token } = req;
   const subscription = await service.getSubscription(token.uid);
   res.json(subscription.toJSON());
+};
+
+const login = async (req, res) => {
+  const schema = req.header('Authorization');
+  if (schema.startsWith('Bearer ')) {
+    const idToken = schema.slice(7);
+    if (NODE_ENV === 'development') {
+      console.log('id token', idToken);
+    }
+    const token = await service.login(idToken);
+    res.json({ token });
+  } else {
+    next(new Error())
+  }
 };
 
 const subscribe = async (req, res) => {
@@ -53,9 +57,9 @@ const updateUser = async (req, res) => {
 
 module.exports = {
   disableUser,
-  login,
   getUser,
   getSubscription,
+  login,
   subscribe,
   unsubscribe,
   updateUser,

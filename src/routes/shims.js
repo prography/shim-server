@@ -7,4 +7,4 @@ const router = Router();
 router.get('/', handleAsync(shims.getShims));
 router.get('/:id', handleAsync(shims.getShim));
 
-module.exports = Router;
+module.exports = router;

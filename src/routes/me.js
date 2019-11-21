@@ -13,4 +13,4 @@ router.post('/subscription', verifyToken, handleAsync(users.subscribe));
 router.get('/subscription', verifyToken, handleAsync(users.getSubscription));
 router.delete('/subscription', verifyToken, handleAsync(users.unsubscribe));
 
-module.exports = Router;
+module.exports = router;

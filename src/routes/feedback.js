@@ -7,4 +7,4 @@ const router = Router();
 
 router.post('/', verifyToken, handleAsync(feedbacks.saveFeedback));
 
-module.exports = Router;
+module.exports = router;

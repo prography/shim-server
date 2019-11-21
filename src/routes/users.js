@@ -6,4 +6,4 @@ const router = Router();
 
 router.post('/auth', handleAsync(users.login));
 
-module.exports = Router;
+module.exports = router;

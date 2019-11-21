@@ -3,8 +3,8 @@ const app = require('./app');
 
 dotenv.config();
 
-const { SHIM_HOST, SHIM_PORT } = process.env;
+const { SERVER_HOST, SERVER_PORT } = process.env;
 
-app.listen(SHIM_PORT, SHIM_HOST, () => {
-  console.log(`shim server is running on ${SHIM_PORT}`);
+app.listen(SERVER_PORT, SERVER_HOST, () => {
+  console.log(`shim server is running on ${SERVER_PORT}`);
 });

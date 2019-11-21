@@ -21,7 +21,7 @@ Input:
 Headers:
 
 ```js
-{ Authorization: googleToken }
+{ Authorization: idToken }
 ```
 
 Output:

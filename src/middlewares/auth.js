@@ -1,6 +1,6 @@
 const dotenv = require('dotenv');
 const jwt = require('jsonwebtoken');
-const UnauthorizedError = require('../errors');
+const { UnauthorizedError } = require('../errors');
 
 const { JsonWebTokenError, NotBeforeError, TokenExpiredError } = jwt;
 

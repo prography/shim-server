@@ -7,4 +7,4 @@ const router = Router();
 router.get('/', handleAsync(authors.getAuthors));
 router.get('/:id', handleAsync(authors.getAuthor));
 
-module.exports = Router;
+module.exports = router;

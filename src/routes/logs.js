@@ -7,4 +7,4 @@ router.post('/music', logs.saveMusicLog);
 router.post('/shim', logs.saveShimLog);
 router.post('/ui', logs.saveUiLog);
 
-module.exports = Router;
+module.exports = router;

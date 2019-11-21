@@ -20,22 +20,6 @@ const disableUser = async (uid) => {
 };
 
 /**
- * @param {string} googleToken
- * @returns {string} JWT
- */
-const login = async (googleToken) => {
-  const oAuth2Client = new OAuth2Client(OAUTH_CLIENT_ID);
-  const ticket = oAuth2Client.verifyIdToken({ idToken: googleToken, audience: OAUTH_CLIENT_ID });
-  const payload = ticket.getPayload();
-  const uid = payload.sub;
-  if (!await userRepository.exists(uid)) {
-    await userRepository.create(uid);
-  }
-  const token = jwt.sign({ uid }, JWT_SECRET, JWT_OPTIONS);
-  return token;
-};
-
-/**
  * @param {string} uid
  * @returns {?User}
  */
@@ -51,6 +35,22 @@ const getUser = async (uid) => {
 const getSubscription = async (uid) => {
   const subscription = await subcriptionRepository.findByUid(uid);
   return subscription;
+};
+
+/**
+ * @param {string} idToken
+ * @returns {string} JWT
+ */
+const login = async (idToken) => {
+  const oAuth2Client = new OAuth2Client(OAUTH_CLIENT_ID);
+  const ticket = await oAuth2Client.verifyIdToken({ idToken, audience: OAUTH_CLIENT_ID });
+  const payload = ticket.getPayload();
+  const uid = payload.sub;
+  if (!await userRepository.exists(uid)) {
+    await userRepository.create(uid);
+  }
+  const token = jwt.sign({ uid }, JWT_SECRET, JWT_OPTIONS);
+  return token;
 };
 
 /**
@@ -78,9 +78,9 @@ const updateUser = async (uid, data) => {
 
 module.exports = {
   disableUser,
-  login,
   getUser,
   getSubscription,
+  login,
   subscribe,
   unsubscribe,
   updateUser,
