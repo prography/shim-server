@@ -1,7 +1,7 @@
 const dotenv = require('dotenv');
 const { OAuth2Client } = require('google-auth-library');
 const jwtPromises = require('./jwtPromises');
-const SchemaError = require('../errors/SchemaError');
+const UnauthorizedError = require('../errors/UnauthorizedError');
 
 dotenv.config();
 
@@ -23,7 +23,7 @@ const getBearerToken = (schema) => new Promise((resolve, reject) => {
     const [, token] = SCHEMA_REGEX.exec(schema);
     resolve(token);
   } else {
-    reject(new SchemaError('Cannot find a token'));
+    reject(new UnauthorizedError('Cannot find a token'));
   }
 });
 
@@ -42,7 +42,7 @@ const signToken = async (payload) => {
  * JWT의 무결성을 확인하고 토큰정보를 반환합니다.
  * @async
  * @param {string} token
- * @returns {Object}
+ * @returns {Promise.<Object>}
  */
 const verifyToken = async (token) => {
   const payload = await jwtPromises.verify(token, JWT_SECRET, JWT_OPTIONS);
@@ -53,7 +53,7 @@ const verifyToken = async (token) => {
  * ID 토큰의 무결성을 확인하고 토큰정보를 반환합니다.
  * @async
  * @param {string} idToken
- * @returns {Object}
+ * @returns {Promise.<Object>}
  */
 const verifyIdToken = async (idToken) => {
   const oAuth2Client = new OAuth2Client(OAUTH_CLIENT_ID);
