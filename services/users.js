@@ -1,16 +1,6 @@
-const dotenv = require('dotenv');
-const { OAuth2Client } = require('google-auth-library');
-const jwt = require('jsonwebtoken');
 const userRepository = require('../repositories/users');
 const subcriptionRepository = require('../repositories/subscriptions');
-
-dotenv.config();
-
-const {
-  JWT_EXPIRED, JWT_ISSUER, JWT_SECRET,
-  OAUTH_CLIENT_ID,
-} = process.env;
-const JWT_OPTIONS = { expiresIn: JWT_EXPIRED, issuer: JWT_ISSUER };
+const { signToken, verifyIdToken } = require('../utils/auth');
 
 /**
  * @param {string} uid
@@ -42,14 +32,12 @@ const getSubscription = async (uid) => {
  * @returns {string} JWT
  */
 const login = async (idToken) => {
-  const oAuth2Client = new OAuth2Client(OAUTH_CLIENT_ID);
-  const ticket = await oAuth2Client.verifyIdToken({ idToken, audience: OAUTH_CLIENT_ID });
-  const payload = ticket.getPayload();
+  const payload = await verifyIdToken(idToken);
   const uid = payload.sub;
   if (!await userRepository.exists(uid)) {
     await userRepository.create(uid);
   }
-  const token = jwt.sign({ uid }, JWT_SECRET, JWT_OPTIONS);
+  const token = await signToken({ uid });
   return token;
 };
 

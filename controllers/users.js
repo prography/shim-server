@@ -1,4 +1,5 @@
 const service = require('../services/users');
+const { getBearerToken } = require('../utils/auth');
 
 const { NODE_ENV } = process.env;
 
@@ -22,14 +23,12 @@ const getSubscription = async (req, res) => {
 
 const login = async (req, res) => {
   const schema = req.header('Authorization');
-  if (schema.startsWith('Bearer ')) {
-    const idToken = schema.slice(7);
-    if (NODE_ENV === 'development') {
-      console.log('id token', idToken);
-    }
-    const token = await service.login(idToken);
-    res.json({ token });
+  const idToken = await getBearerToken(schema);
+  if (NODE_ENV === 'development') {
+    console.log('id token', idToken);
   }
+  const token = await service.login(idToken);
+  res.json({ token });
 };
 
 const subscribe = async (req, res) => {

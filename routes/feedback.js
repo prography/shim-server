@@ -1,10 +1,10 @@
 const { Router } = require('express');
 const feedbacks = require('../controllers/feedbacks');
-const { verifyToken } = require('../middlewares/auth');
+const { verifyAuth } = require('../middlewares/auth');
 const { handleAsync } = require('../utils/routes');
 
 const router = Router();
 
-router.post('/', verifyToken, handleAsync(feedbacks.saveFeedback));
+router.post('/', verifyAuth, handleAsync(feedbacks.saveFeedback));
 
 module.exports = router;

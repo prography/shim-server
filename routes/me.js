@@ -1,16 +1,16 @@
 const { Router } = require('express');
 const users = require('../controllers/users');
-const { verifyToken } = require('../middlewares/auth');
+const { verifyAuth } = require('../middlewares/auth');
 const { handleAsync } = require('../utils/routes');
 
 const router = Router();
 
-router.get('/', verifyToken, handleAsync(users.getUser));
-router.patch('/', verifyToken, handleAsync(users.updateUser));
-router.delete('/', verifyToken, handleAsync(users.disableUser));
+router.get('/', verifyAuth, handleAsync(users.getUser));
+router.patch('/', verifyAuth, handleAsync(users.updateUser));
+router.delete('/', verifyAuth, handleAsync(users.disableUser));
 
-router.post('/subscription', verifyToken, handleAsync(users.subscribe));
-router.get('/subscription', verifyToken, handleAsync(users.getSubscription));
-router.delete('/subscription', verifyToken, handleAsync(users.unsubscribe));
+router.post('/subscription', verifyAuth, handleAsync(users.subscribe));
+router.get('/subscription', verifyAuth, handleAsync(users.getSubscription));
+router.delete('/subscription', verifyAuth, handleAsync(users.unsubscribe));
 
 module.exports = router;
