@@ -1,4 +1,17 @@
 class User {
+  static create(row) {
+    const {
+      id, uid,
+      email, name, status, deviceId,
+      createdAt, updatedAt, deletedAt, loginAt,
+    } = row;
+    return new User(
+      id, uid,
+      email, name, status, deviceId,
+      createdAt, updatedAt, deletedAt, loginAt,
+    );
+  }
+
   /**
    * @param {number} id 사용자 아이디
    * @param {string} uid 고유 아이디

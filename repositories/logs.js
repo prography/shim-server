@@ -3,7 +3,7 @@ const pool = require('../database');
 /**
  * @param {string} uid
  * @param {string} musicId
- * @param {string} action
+ * @param {?string} action
  */
 const createMusicLog = async (uid, musicId, action) => {
   await pool.query(`
@@ -20,7 +20,7 @@ const createMusicLog = async (uid, musicId, action) => {
 /**
  * @param {string} uid
  * @param {string} shimId
- * @param {string} action
+ * @param {?string} action
  */
 const createShimLog = async (uid, shimId, action) => {
   await pool.query(`
@@ -36,7 +36,7 @@ const createShimLog = async (uid, shimId, action) => {
 
 /**
  * @param {string} uid
- * @param {string} action
+ * @param {?string} action
  */
 const createUiLog = async (uid, action) => {
   await pool.query(`

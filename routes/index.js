@@ -10,7 +10,8 @@ const users = require('./users');
 
 const router = Router();
 
-const pong = (_, res) => res.set('Content-Type', 'text/plain').send('pong');
+const pong = (_, res) => res.json({ status: 200, message: 'pong' });
+const notFound = (_, res) => res.json({ status: 404, message: 'Not Found' });
 
 router.all('/ping', pong);
 
@@ -22,5 +23,7 @@ router.use('/musics', musics);
 router.use('/plans', plans);
 router.use('/shims', shims);
 router.use('/users', users);
+
+router.use(notFound);
 
 module.exports = router;

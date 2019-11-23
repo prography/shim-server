@@ -1,4 +1,17 @@
 class Shim {
+  static create(row) {
+    const {
+      id, authorId,
+      title, category, description, thumbnail,
+      duration, createdAt,
+    } = row;
+    return new Shim(
+      id, authorId,
+      title, category, description, thumbnail,
+      duration, createdAt,
+    );
+  }
+
   /**
    * @param {number} id 쉼 아이디
    * @param {number} authorId 제공자 아이디
@@ -18,6 +31,24 @@ class Shim {
     this.thumbnail = thumbnail;
     this.duration = duration;
     this.createdAt = createdAt;
+  }
+
+  toJSON() {
+    const {
+      id, authorId,
+      title, category, description, thumbnail,
+      duration, createdAt,
+    } = this;
+    return {
+      id,
+      authorId,
+      title,
+      category,
+      description,
+      thumbnail,
+      duration,
+      createdAt,
+    };
   }
 }
 

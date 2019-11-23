@@ -1,4 +1,17 @@
 class Subscription {
+  static create(row) {
+    const {
+      id, planId, userId,
+      valid,
+      startedAt, endedAt, canceledAt,
+    } = row;
+    return new Subscription(
+      id, planId, userId,
+      valid,
+      startedAt, endedAt, canceledAt,
+    );
+  }
+
   /**
    * @param {number} id 구독 아이디
    * @param {number} planId 상품 아이디

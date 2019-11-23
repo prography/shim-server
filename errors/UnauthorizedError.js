@@ -1,4 +1,6 @@
-class UnauthorizedError extends Error {
+const ResponseError = require('./ResponseError');
+
+class UnauthorizedError extends ResponseError {
   constructor(message) {
     super(message);
     this.statusCode = 401;

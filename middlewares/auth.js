@@ -16,13 +16,13 @@ const verifyAuth = (req, _, next) => {
       } else {
         switch (reason.constructor) {
           case JsonWebTokenError:
-            next(new UnauthorizedError(`Token was invalid - ${reason.message}`));
+            next(new UnauthorizedError(`The given token was invalid - ${reason.message}`));
             break;
           case NotBeforeError:
-            next(new UnauthorizedError('Token was not active'));
+            next(new UnauthorizedError('The given token was not active'));
             break;
           case TokenExpiredError:
-            next(new UnauthorizedError(`Token was expired - exp: ${new Date(reason.expiredAt)})`));
+            next(new UnauthorizedError(`The given token was expired - exp: ${new Date(reason.expiredAt)})`));
             break;
           default:
             next(new UnauthorizedError('Unexpected error occured'));

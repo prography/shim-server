@@ -3,7 +3,7 @@ const pool = require('../database');
 /**
  * @param {string} uid
  * @param {string} title
- * @param {string} content
+ * @param {?string} content
  */
 const create = async (uid, title, content) => {
   await pool.query(`

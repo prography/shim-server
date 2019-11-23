@@ -1,4 +1,15 @@
 class Author {
+  static create(row) {
+    const {
+      id,
+      email, name, profile, about,
+    } = row;
+    return new Author(
+      id,
+      email, name, profile, about,
+    );
+  }
+
   /**
    * @param {number} id 저자 아이디
    * @param {?string} email 저자 이메일
@@ -12,6 +23,20 @@ class Author {
     this.name = name;
     this.profile = profile;
     this.about = about;
+  }
+
+  toJSON() {
+    const {
+      id,
+      email, name, profile, about,
+    } = this;
+    return {
+      id,
+      email,
+      name,
+      profile,
+      about,
+    };
   }
 }
 

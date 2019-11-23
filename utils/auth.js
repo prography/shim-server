@@ -55,7 +55,7 @@ const verifyToken = async (token) => {
  * @param {string} idToken
  * @returns {Promise.<Object>}
  */
-const verifyIdToken = async (idToken) => {
+const verifyIdToken = async (idToken) => { // todo: try-catch
   const oAuth2Client = new OAuth2Client(OAUTH_CLIENT_ID);
   const ticket = await oAuth2Client.verifyIdToken({ idToken, audience: OAUTH_CLIENT_ID });
   const payload = ticket.getPayload();

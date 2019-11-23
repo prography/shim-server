@@ -1,4 +1,17 @@
 class Music {
+  static create(row) {
+    const {
+      id, authorId,
+      title, category, thumbnail, duration,
+      createdAt,
+    } = row;
+    return new Music(
+      id, authorId,
+      title, category, thumbnail, duration,
+      createdAt,
+    );
+  }
+
   /**
    * @param {number} id 음악 아이디
    * @param {number} authorId 저자 아이디
@@ -16,6 +29,23 @@ class Music {
     this.thumbnail = thumbnail;
     this.duration = duration;
     this.createdAt = createdAt;
+  }
+
+  toJSON() {
+    const {
+      id, authorId,
+      title, category, thumbnail, duration,
+      createdAt,
+    } = this;
+    return {
+      id,
+      authorId,
+      title,
+      category,
+      thumbnail,
+      duration,
+      createdAt,
+    };
   }
 }
 
