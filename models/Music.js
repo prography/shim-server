@@ -2,12 +2,12 @@ class Music {
   static create(row) {
     const {
       id, authorId,
-      title, category, thumbnail, duration,
+      title, category, thumbnail, src, duration,
       createdAt,
     } = row;
     return new Music(
       id, authorId,
-      title, category, thumbnail, duration,
+      title, category, thumbnail, src, duration,
       createdAt,
     );
   }
@@ -18,15 +18,17 @@ class Music {
    * @param {string} title 음악 제목
    * @param {number} category 음악 분류
    * @param {?string} thumbnail 음악 썸네일 링크
+   * @param {string} src 음악 파일 링크
    * @param {number} duration 음악 재생시간(초)
    * @param {Date} createdAt 음악 등록시간
    */
-  constructor(id, authorId, title, category, thumbnail, duration, createdAt) {
+  constructor(id, authorId, title, category, thumbnail, src, duration, createdAt) {
     this.id = id;
     this.authorId = authorId;
     this.title = title;
     this.category = category;
     this.thumbnail = thumbnail;
+    this.src = src;
     this.duration = duration;
     this.createdAt = createdAt;
   }
@@ -34,7 +36,7 @@ class Music {
   toJSON() {
     const {
       id, authorId,
-      title, category, thumbnail, duration,
+      title, category, thumbnail, src, duration,
       createdAt,
     } = this;
     return {
@@ -43,6 +45,7 @@ class Music {
       title,
       category,
       thumbnail,
+      src,
       duration,
       createdAt,
     };
