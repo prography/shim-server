@@ -6,7 +6,7 @@ const EMAIL_REGEX = /^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~
  * @param {Object} checkers
  * @returns {boolean}
  */
-const checkObject = (target, checkers) => Object.entires(checkers)
+const checkObject = (target, checkers) => Object.entries(checkers)
   .every(([key, checker]) => (key in target ? checker(target[key]) : true));
 
 /**

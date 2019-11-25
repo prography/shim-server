@@ -35,7 +35,9 @@ const findByUid = async (uid) => {
  * @param {Object} data
  */
 const updateByUid = async (uid, data) => {
-  await pool.query('UPDATE users SET ? WHERE uid = ?', [data, uid]);
+  if (Object.keys(data).length > 0) {
+    await pool.query('UPDATE users SET ? WHERE uid = ?', [data, uid]);
+  }
 };
 
 module.exports = {
