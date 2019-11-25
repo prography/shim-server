@@ -27,7 +27,8 @@ Headers:
 Output:
 
 ```text
-{ token } // JWT
+{ status : 200,
+  token : ... } // JWT
 ```
 
 ### GET /me
@@ -43,7 +44,16 @@ Headers:
 Output:
 
 ```text
-{ email, name, status, deviceId }
+{
+    status : 200,
+    user : {
+        id : 2,
+        uid : ...,
+        email : null,
+        name : null,
+        status : 1
+    }
+}
 ```
 
 ### PATCH /me
@@ -56,7 +66,7 @@ Headers:
 { Authorization: Bearer JWT }
 ```
 
-Output:
+Input:
 
 ```text
 { email, name, deviceId }
@@ -72,6 +82,11 @@ Headers:
 { Authorization: Bearer JWT }
 ```
 
+Output:
+
+```text
+{ status : 200, message : "success" }
+
 ### POST /me/subscription
 
 상품을 구독합니다.
@@ -86,6 +101,12 @@ Input:
 
 ```text
 { planId }
+```
+
+Output:
+
+```text
+{ status : 200, message : "success" }
 ```
 
 ### GET /me/subscription
