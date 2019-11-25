@@ -11,7 +11,7 @@
 Input:
 
 ```text
-{ token }
+{ token } // string
 ```
 
 ### POST /users/auth
@@ -69,7 +69,9 @@ Headers:
 Input:
 
 ```text
-{ email, name, deviceId }
+{ email, 			// string 
+	name,				// string
+	deviceId }	// int
 ```
 
 ### DELETE /me
@@ -86,6 +88,7 @@ Output:
 
 ```text
 { status : 200, message : "success" }
+```
 
 ### POST /me/subscription
 
@@ -100,7 +103,7 @@ Headers:
 Input:
 
 ```text
-{ planId }
+{ planId } // int
 ```
 
 Output:
