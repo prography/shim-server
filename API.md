@@ -47,11 +47,11 @@ Output:
 {
     status : 200,
     user : {
-        id : 2,
-        uid : ...,
-        email : null,
-        name : null,
-        status : 1
+        id : 2, // int 
+        uid : ..., // string
+        email : null, // string
+        name : null, // string
+        status : 1 // int
     }
 }
 ```
@@ -125,7 +125,7 @@ Headers:
 Output:
 
 ```text
-{ name, cost, duration, startedAt, endedAt } || {}
+{ name,cost, duration, startedAt, endedAt } || {}
 ```
 
 ### DELETE /me/subscription
@@ -157,7 +157,18 @@ Output:
 Output:
 
 ```text
-{ id, email, name, profile, about }
+{
+    "status": 200,
+    "authors": [
+        {
+            "id": 1,
+            "email": "email",
+            "name": "name",
+            "profile": "profile",
+            "about": "about"
+        }
+    ]
+}
 ```
 
 ## Plans
@@ -169,7 +180,17 @@ Output:
 Output:
 
 ```text
-[{ id, name, cost, duration }]
+{
+    "status": 200,
+    "plans": [
+        {
+            "id": 1,
+            "name": "ddd",
+            "cost": 333,
+            "duration": 222
+        }
+    ]
+}
 ```
 
 ### GET /plans/{id}
@@ -179,7 +200,15 @@ Output:
 Output:
 
 ```text
-{ id, name, cost, duration }
+{
+    "status": 200,
+    "plan": {
+        "id": 1,
+        "name": "ddd",
+        "cost": 333,
+        "duration": 222
+    }
+}
 ```
 
 ## Musics
@@ -191,7 +220,27 @@ Output:
 Output:
 
 ```text
-[{ id, authorId, title, category, thumbnail, duration, createdAt }]
+{
+    "status": 200,
+    "musics": [
+        {
+            "id": 3,
+            "title": "Minyo San Kyoku",
+            "category": 0,
+            "thumbnail": "3.jpg",
+            "src": "Minyo_San_Kyoku.mp3",
+            "duration": 100000
+        },
+        {
+            "id": 4,
+            "title": "Minyo San Kyoku",
+            "category": 0,
+            "thumbnail": "3.jpg",
+            "src": "Minyo_San_Kyoku.mp3",
+            "duration": 100000
+        }
+    ]
+}
 ```
 
 ### GET /musics/{id}
@@ -201,7 +250,17 @@ Output:
 Output:
 
 ```text
-{ id, authorId, title, category, thumbnail, duration, createdAt }
+{
+    "status": 200,
+    "music": {
+        "id": 3,
+        "title": "Minyo San Kyoku",
+        "category": 0,
+        "thumbnail": "3.jpg",
+        "src": "Minyo_San_Kyoku.mp3",
+        "duration": 100000
+    }
+}
 ```
 
 ## Shims
@@ -213,7 +272,20 @@ Output:
 Output:
 
 ```text
-[{ id, authorId, title, category, description, thumbnail, duration, createdAt }]
+{
+    "status": 200,
+    "shims": [
+        {
+            "id": 1,
+            "title": "shim",
+            "category": 1,
+            "description": "description",
+            "src": "src.mp4",
+            "thumbnail": "thumb.jpg",
+            "duration": 100000
+        }
+    ]
+}
 ```
 
 ### GET /shims/{id}
@@ -223,7 +295,18 @@ Output:
 Output:
 
 ```text
-{ id, authorId, title, category, description, thumbnail, duration, createdAt }
+{
+    "status": 200,
+    "shim": {
+        "id": 1,
+        "title": "shim",
+        "category": 1,
+        "description": "description",
+        "src": "src.mp4",
+        "thumbnail": "thumb.jpg",
+        "duration": 100000
+    }
+}
 ```
 
 ## Logs
@@ -291,5 +374,7 @@ Headers:
 Input:
 
 ```text
-{ title, content, createdAt }
+{ title, // strint
+content // string ㄴ}
 ```
+
