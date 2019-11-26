@@ -7,10 +7,10 @@ const pool = require('../database');
  */
 const create = async (planId, uid) => {
   await pool.query(`
-    INSERT INTO subscriptions (planId, user_id, status, created_at, ended_at)
+    INSERT INTO subscriptions (plan_id, user_id, valid, started_at, ended_at)
     VALUES (
       ?,
-      SELECT user_id FROM users WHERE uid = ?,
+      (SELECT id FROM users WHERE uid = ?),
       1,
       NOW(),
       DATE_ADD(
@@ -26,7 +26,7 @@ const create = async (planId, uid) => {
  * @returns {?Subscription}
  */
 const findByUid = async (uid) => {
-  const [[row]] = await pool.query('SELECT * FROM subscriptions WHERE uid = ? AND valid = 1 LIMIT 1', [uid]);
+  const [[row]] = await pool.query('SELECT * FROM subscriptions WHERE user_id = (SELECT id FROM users WHERE uid = ?) AND valid = 1 LIMIT 1', [uid]);
   if (row) {
     const subscription = Subscription.create(row);
     return subscription;
@@ -39,7 +39,7 @@ const findByUid = async (uid) => {
  * @param {Object} data
  */
 const updateByUid = async (uid, data) => {
-  await pool.query('UPDATE subscriptions SET ? WHERE uid = ?', [data, uid]);
+  await pool.query('UPDATE subscriptions SET ? WHERE user_id = (SELECT id FROM users WHERE uid = ?)', [data, uid]);
 };
 
 module.exports = {
