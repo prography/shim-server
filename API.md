@@ -14,6 +14,15 @@ Input:
 { token } // string
 ```
 
+Output:
+
+```text
+{
+    "status": 200,
+    "message": "success"
+}
+```
+
 ### POST /users/auth
 
 로그인합니다.
@@ -74,6 +83,15 @@ Input:
 	deviceId }	// int
 ```
 
+Output:
+
+```text
+{
+    "status": 200,
+    "message": "success"
+}
+```
+
 ### DELETE /me
 
 회원 탈퇴합니다.
@@ -125,7 +143,13 @@ Headers:
 Output:
 
 ```text
-{ name,cost, duration, startedAt, endedAt } || {}
+{
+    "status": 200,
+    "subscription": {
+        "id": 1, // int
+        "valid": 1 // int
+    }
+}
 ```
 
 ### DELETE /me/subscription
@@ -136,6 +160,15 @@ Headers:
 
 ```text
 { Authorization: Bearer JWT }
+```
+
+Output:
+
+```text
+{
+    "status": 200,
+    "message": "success"
+}
 ```
 
 ## Authors
@@ -375,6 +408,15 @@ Input:
 
 ```text
 { title, // strint
-content // string ㄴ}
+content // string }
+```
+
+Output:
+
+```text
+{
+    "status": 200,
+    "message": "success"
+}
 ```
 
