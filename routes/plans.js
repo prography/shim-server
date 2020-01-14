@@ -1,9 +1,10 @@
 const { Router } = require('express');
-const users = require('../controllers/users');
+const plans = require('../controllers/plans');
 const { handleAsync } = require('../utils/routes');
 
 const router = Router();
 
-router.post('/auth', handleAsync(users.login));
+router.get('/', handleAsync(plans.getPlans));
+router.get('/:id', handleAsync(plans.getPlan));
 
 module.exports = router;

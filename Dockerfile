@@ -1,5 +1,9 @@
 FROM node:erbium-alpine
 
+# Set timezone
+RUN apk add --no-cache tzdata
+ENV TZ Asia/Seoul
+
 # Create app directory
 WORKDIR /usr/src/shim
 

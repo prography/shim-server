@@ -1,9 +1,10 @@
 const { Router } = require('express');
-const users = require('../controllers/users');
+const shims = require('../controllers/shims');
 const { handleAsync } = require('../utils/routes');
 
 const router = Router();
 
-router.post('/auth', handleAsync(users.login));
+router.get('/', handleAsync(shims.getShims));
+router.get('/:id', handleAsync(shims.getShim));
 
 module.exports = router;

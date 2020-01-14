@@ -1,14 +1,29 @@
-module.exports = (app) => {
-  const express = require('express')
-  const router = express.Router()
+const { Router } = require('express');
+const authors = require('./authors');
+const feedback = require('./feedback');
+const logs = require('./logs');
+const me = require('./me');
+const musics = require('./musics');
+const plans = require('./plans');
+const shims = require('./shims');
+const users = require('./users');
 
-  router.use('/main', require('./main')(app))
-  router.use('/sleep', require('./sleep')(app))
-  router.use('/video', require('./video')(app))
-  router.use('/music', require('./music')(app))
-  router.use('/log', require('./log')(app))
-  router.use('/etc', require('./etc')(app))
-  router.use('/msec', require('./msec')(app))
+const router = Router();
 
-  return router
-}
+const pong = (_, res) => res.json({ status: 200, message: 'pong' });
+const notFound = (_, res) => res.json({ status: 404, message: 'Not Found' });
+
+router.all('/ping', pong);
+
+router.use('/authors', authors);
+router.use('/feedback', feedback);
+router.use('/logs', logs);
+router.use('/me', me);
+router.use('/musics', musics);
+router.use('/plans', plans);
+router.use('/shims', shims);
+router.use('/users', users);
+
+router.use(notFound);
+
+module.exports = router;
